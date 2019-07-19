@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h = "http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Add Movie</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <p:growl id="growl" sticky="false" showDetail="true" life="3000"/>
+        <div class="centered">
+            <h:form id="movieForm">
+                <div class="centered">
+                    <h:outputText styleClass="myFont" value="Movie Name" style="display:block;"/>
+                    <p:inputText id="name" value="#{addMovieBackingBean.givenMovie.name}" required="true" label="name"/>
+                    <br/><br/>
+
+                    <h:outputText styleClass="myFont" value="Movie Genre" style="display:block;"/>
+                    <p:inputText id="genre" value="#{addMovieBackingBean.givenMovie.genre}" required="true" label="genre"/>
+                    <br/><br/>
+
+                    <h:outputText styleClass="myFont" value="Rating" style="display:block;"/>
+                    <p:inputText id="rating" value="#{addMovieBackingBean.givenMovie.rating}" required="true" label="rating"/>
+                    <br/><br/>
+
+
+                    <p:commandButton value="Add Movie" action="#{addMovieBackingBean.addMovieToDatabase}" ajax="false"
+                                     update="outputMessage"/>
+                    <br/>
+                    <p:outputLabel id="outputMessage" value="#{addMovieBackingBean.movieList}"/>
+                </div>
+            </h:form>
+
+        </div>
+        <br/>
+    </h:body>
+</f:view>
+</html>
