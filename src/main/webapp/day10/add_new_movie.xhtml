@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Homepage</title>
+        <h:outputStylesheet library="css" name="myStyle.css"/>
+    </h:head>
+    <h:body>
+        <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
+
+        <h:form>
+            <div class="centered">
+                <p:inputText id="inputTitle" value="#{addNewMovieBean.inputMovieTitle}" required="true"/>
+                <p:watermark for="inputTitle" value="Movie Title" id="watermark1"/><br/>
+
+                <p:inputText id="inputGenre" value="#{addNewMovieBean.inputMovieGenre}" required="true"/>
+                <p:watermark for="inputGenre" value="Movie Genre" id="watermark2"/><br/>
+
+                <p:inputText id="inputRating" value="#{addNewMovieBean.inputMovieRating}" required="true"/>
+                <p:watermark for="inputRating" value="Movie Rating" id="watermark3"/><br/>
+
+                <p:inputText id="inputProductionYear" value="#{addNewMovieBean.inputMovieProductionYear}" required="true"/>
+                <p:watermark for="inputProductionYear" value="Movie Production Year" id="watermark4"/><br/><br/>
+
+                <p:commandButton value="Add new movie" action="#{addNewMovieBean.addMovieToDataBase}"
+                                 update="growl"/>
+                <br/>
+
+                <!--
+                <p:outputLabel id="outputMessage" value="#{addNewMovieBean.outputMessage}"/>
+
+                <h:panelGroup id="showMovieList">
+                    <ui:repeat value="#{addNewMovieBean.movieList}" var="item">
+                        <p:outputLabel value="#{item.toString()}"/>
+                    </ui:repeat>
+                </h:panelGroup>
+                -->
+
+            </div>
+        </h:form>
+    </h:body>
+</f:view>
+</html>
