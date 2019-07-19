@@ -21,17 +21,24 @@ public class SessionBean implements Serializable {
     private int year;
     private int length;
     private String author;
+    private String rating;
 
     List<Movie> myList = new ArrayList<Movie>();
-    Movie movie = new Movie(name,year,length,author);
+    Movie movie = new Movie(name,year,length,author,rating);
     private String outputMessage = "Empty";
-
+    private String messageError = "Fatal error:Rating is not a number";
     public String calculateOutput(){
-        myList.add(movie);
-        return "Name"+name+" Year:"+year+" Length:"+length+" Author:" + author;
+        if(rating.contains(".")) {
+            myList.add(movie);
+            return "Name:" + name + " Year:" + year + " Length:" + length + " Author:" + author + " Rating:" + rating;
+        }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Invalid."));
+            return "";
+        }
     }
-    public void saveInput(){
 
-       outputMessage = calculateOutput();
+    public void saveInput(){
+            outputMessage = calculateOutput();
+
     }
 }

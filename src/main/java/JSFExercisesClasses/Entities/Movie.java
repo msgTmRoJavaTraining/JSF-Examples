@@ -9,11 +9,12 @@ public class Movie {
     private int aparitionYear;
     private int length;
     private String author;
-
-    public Movie(String name, int aparitionYear, int length, String author) {
+    private String rating;
+    public Movie(String name, int aparitionYear, int length, String author,String rating) {
         this.name = name;
         this.aparitionYear = aparitionYear;
         this.length = length;
         this.author = author;
+        this.rating = rating;
     }
 }

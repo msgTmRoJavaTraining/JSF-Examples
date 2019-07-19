@@ -10,13 +10,16 @@
         <title>Homepage</title>
         <h:outputStylesheet library="css" name="styles.css"/>
     </h:head>
-    <h:body>
+    <h:body style="background-color:greenyellow">
         <h:form>
             <p:outputLabel value="Welcome, #{homepageBackingBean.loggedInUserName}"/>
             <div class="centered">
                 <h3 class="title">Hello!</h3>
                 <p:commandButton value="Sesion Version 1" ajax="false"
                                  action="#{homePageBean.navigateTo('sessionFirstVersion')}"/>
+                <br/>
+                <p:commandButton value="LogOut" ajax="false"
+                                 action="#{homePageBean.navigateTo('myLogin')}"/>
             </div>
             <br/>
 

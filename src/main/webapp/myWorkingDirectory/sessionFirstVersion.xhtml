@@ -10,35 +10,27 @@
         <title>Homepage</title>
         <h:outputStylesheet library="css" name="styles.css"/>
     </h:head>
-    <h:body>
+    <h:body style="background-color:greenyellow">
         <p:growl id="growl" sticky="false" showDetail="true"/>
         <h:form>
             <div class="centered">
                 <p:inputText id="Name" value="#{sessionBean.name}"/>
                 <p:watermark for="Name" value="Name of the movie.." id="watermarkName"/>
                 <br/>
-                <p:commandButton value="Save" action="#{sessionScopeTestBackingBean.saveInput}" ajax="true"
-                                 update="outputMessage"/>
-                <br/>
-
                 <p:inputText id="AparitionYear" value="#{sessionBean.year}"/>
                 <p:watermark for="AparitionYear" value="Aparition year of the movie.." id="watermarkYear"/>
-                <br/>
-                <p:commandButton value="Save" action="#{sessionScopeTestBackingBean.saveInput}" ajax="true"
-                                 update="outputMessage"/>
                 <br/>
                 <p:inputText id="Length" value="#{sessionBean.length}"/>
                 <p:watermark for="Length" value="Length of movie..." id="watermarkLength"/>
                 <br/>
-                <p:commandButton value="Save" action="#{sessionScopeTestBackingBean.saveInput}" ajax="true"
-                                 update="outputMessage"/>
-                <br/>
                 <p:inputText id="Author" value="#{sessionBean.author}"/>
                 <p:watermark for="Author" value="Author of movie..." id="watermarkAuthor"/>
                 <br/>
-
+                <p:inputText id="rating" value="#{sessionBean.rating}"/>
+                <p:watermark for="rating" value="Rating" id="watermarkRating"/>
+                <br/>
                 <p:commandButton value="Save" action="#{sessionBean.saveInput}" ajax="true"
-                                 update="outputMessage"/>
+                                 update="outputMessage growl"/>
 
 
                 <br/>
