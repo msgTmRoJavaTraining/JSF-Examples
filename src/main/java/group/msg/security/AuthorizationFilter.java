@@ -20,13 +20,13 @@ public class AuthorizationFilter implements Filter {
             Object loggedInOrNot = req.getSession().getAttribute("loggedIn");
 
             String reqURI = req.getRequestURI();
-            if (reqURI.contains("/login.xhtml")
+            if (reqURI.contains("/day10/my_login.xhtml")
                     || reqURI.contains("/public/")
                     || reqURI.contains("javax.faces.resource")
                     || (loggedInOrNot!=null && loggedInOrNot.equals(true))) {
                 chain.doFilter(request, response);
             } else {
-                resp.sendRedirect(req.getContextPath() + "/login.xhtml");
+                resp.sendRedirect(req.getContextPath() + "/day10/my_login.xhtml");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
