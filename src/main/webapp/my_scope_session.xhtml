@@ -11,21 +11,22 @@
         <h:outputStylesheet library="css" name="styles.css"/>
     </h:head>
     <h:body>
-        <p:growl id="growl" sticky="false" showDetail="true"/>
+        <p:growl id="growl" sticky="true" showDetail="true"  life="3000"/>
+
         <h:form>
             <div class="centered">
                 <p:inputText id="inputToSave" value="#{mySessionScopeBackingBean.savedData}"/>
                 <p:inputText id="inputToSave1" value="#{mySessionScopeBackingBean.rating}"/>
 
                 <p:watermark for="inputToSave" value="Movie title to save.." id="watermark"/>
+                <p:watermark for="inputToSave1" value="Movie rating.." id="watermark1"/>
 
                 <p:commandButton value="Save" action="#{mySessionScopeBackingBean.saveInput}" ajax="true"
-                                 update="outputMessage"/>
+                                 update="outputMessage growl"/>
                 <br/>
+
                 <p:outputLabel id="outputMessage" value="#{mySessionScopeBackingBean.outputMessage}"/>
                 <br/>
-
-
 
             </div>
         </h:form>
