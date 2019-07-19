@@ -1,4 +1,4 @@
-package group.msg.jsf_beans;
+package group.msg.jsf_MyBean;
 
 import group.msg.WebHelper;
 import lombok.Data;
@@ -8,23 +8,29 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
-
 @Data
 @Named
 @SessionScoped
-public class LoginBackingBean implements Serializable {
-    private String user;
-    private String pwd;
+public class MyLoginBackingBean implements Serializable
+{
 
-    public String validateUsernamePassword() {
-        if (user.equals("admin") && pwd.equals("admin")) {
+    private String user;
+    private String password;
+
+    public String validateCredentials()
+    {
+        if(user.equals("movie") && password.equals("movie"))
+        {
             WebHelper.getSession().setAttribute("loggedIn",true);
-            return "homepage";
-        }else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Invalid credentials."));
+            return "my_homepage";
+        }
+        else
+        {
+            FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Error","Incorrect username or password "));
             return "";
         }
     }
+
     public String getCurrentlyLoggedInUsername(){
         return user;
     }

@@ -7,23 +7,24 @@
 >
 <f:view>
     <h:head>
-        <title>Login</title>
+        <title>MyLogin</title>
         <h:outputStylesheet library="css" name="styles.css"/>
     </h:head>
+
     <h:body>
         <p:growl id="growl" sticky="false" showDetail="true" life="5000"/>
         <div class="centered">
-            <h:form id="loginForm">
-                <h3 class="title">Login</h3>
-                <h:outputText styleClass="myFont" value="Username" style="display:block;"/>
-                <p:inputText id="username" value="#{loginBackingBean.user}" required="true" label="username"/>
+            <h:form id="myLoginForm">
+                <h3 class="title">Movie Lover</h3>
+                <h:outputText styleClass="myFont" value="Your_Movie_Username" style="display:block;"/>
+                <p:inputText id="username" value="#{myLoginBackingBean.user}" required="true" label="username"/>
                 <br/><br/>
 
-                <h:outputText styleClass="myFont" value="Password" style="display:block;"/>
-                <p:password id="password" value="#{loginBackingBean.pwd}" required="true" label="password"/>
+                <h:outputText styleClass="myFont" value="Your_Movie_Password" style="display:block;"/>
+                <p:password id="password" value="#{myLoginBackingBean.password}" required="true" label="password"/>
                 <br/><br/>
 
-                <p:commandButton value="Login" action="#{loginBackingBean.validateUsernamePassword}"
+                <p:commandButton value="Login" action="#{myLoginBackingBean.validateCredentials}"
                                  ajax="false"
                                  styleClass="aButton"/>
                 <br/>
@@ -31,6 +32,8 @@
 
         </div>
         <br/>
+
     </h:body>
+
 </f:view>
 </html>
