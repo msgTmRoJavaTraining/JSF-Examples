@@ -11,36 +11,44 @@
         <h:outputStylesheet library="css" name="styles.css"/>
     </h:head>
     <body><p:outputLabel value="Welcome #{myHomepageBackingBean.loggedInUserName}! This is your movie watchlist. "/>
-    <p> </p>
+    <p></p>
 
-    <p:dataTable var="m" value="#{addMovie.list}" selection="#{myHomepageBackingBean.selectedMovie}"
+    <p:dataTable var="m" value="#{myHomepageBackingBean.list}" rows="10"
+                 paginator="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="5,10,15"
+                 selection="#{myHomepageBackingBean.selectedMovie}"
                  rowKey="#{m.name}"
                  selectionMode="single">
         <p:ajax event="rowSelect" listener="#{myHomepageBackingBean.rowSelected}" update="infoLabel"/>
-        <p:column headerText="Name">
+        <p:column headerText="Name" sortBy="#{m.name}" filterBy="#{m.name}"
+                  filterMatchMode="contains">
             <h:outputText value="#{m.name}"/>
         </p:column>
 
-        <p:column headerText="Genre">
+        <p:column headerText="Genre" sortBy="#{m.genre}" filterBy="#{m.genre}"
+                  filterMatchMode="contains">
             <h:outputText value="#{m.genre}"/>
         </p:column>
 
-        <p:column headerText="Year">
+        <p:column headerText="Year" sortBy="#{m.year}" filterBy="#{m.year}"
+                  filterMatchMode="contains">
             <h:outputText value="#{m.year}"/>
         </p:column>
 
-        <p:column headerText="Rating(Out of 5)">
+        <p:column headerText="Rating(Out of 5)" sortBy="#{m.rating}" filterBy="#{m.rating}"
+                  filterMatchMode="contains">
             <h:outputText value="#{m.rating}"/>
         </p:column>
     </p:dataTable>
     <h:form>
         <p:commandButton value="Add a movie in watchlist" ajax="false"
-                             action="#{myHomepageBackingBean.navigateTo('add_movie')}"/>
+                         action="#{myHomepageBackingBean.navigateTo('add_movie')}"/>
         <p:commandButton value="Logout" ajax="false"
                          action="#{myHomepageBackingBean.navigateTo('index')}"/>
     </h:form>
 
-    <p:outputLabel ajax="true" id="infoLabel" value="#{myHomepageBackingBean.outputMessage}"/>
+    <p:outputLabel ajax="true" id="infoLabel" style="color: red" value="#{myHomepageBackingBean.outputMessage}"/>
     </body>
 
 </f:view>

@@ -3,12 +3,16 @@ package group.msg.jsf_beans;
 import group.msg.entities.Movie;
 import lombok.Data;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Optional;
 
 @Data
 @Named
@@ -20,11 +24,20 @@ public class addMovie implements Serializable {
     private int year;
     private Date date;
     private String information;
-    private List<Movie> list = new ArrayList<>();
     private String output_message;
+    private String[] public_category;
+    private String[] selectedCategory;
+
+    @Inject
+    private MyHomepageBackingBean myHomepageBackingBean;
+
+    @PostConstruct
+    public void init() {
+        getEnumElements();
+    }
 
     public void addingMovieAjax() {
-        Optional<Movie> answer = list.stream().filter(movie -> movie.getName().equals(this.name)).findAny();
+        Optional<Movie> answer = myHomepageBackingBean.getList().stream().filter(movie -> movie.getName().equals(this.name)).findAny();
         if (answer.isPresent()) {
             this.output_message = "Sorry, you watched this movie already!";
         } else {
@@ -32,11 +45,8 @@ public class addMovie implements Serializable {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
                 year = calendar.get(Calendar.YEAR);
-                list.add(new Movie(name, rating, genre, year, information));
-                list.add(new Movie("Get Out", 5, "Thriller", 2018, "interesting"));
-                list.add(new Movie("Logan", 5, "Action/Adventure", 2018, "if you're a X-Men fan, this movie is a must"));
-                list.add(new Movie("Avengers: Endgame", 4.5, "SF/Adventure", 2018, "MCU"));
-                list.add(new Movie("Mother", 4, "Thriller", 2018, "psychologic"));
+                myHomepageBackingBean.addMovie(new Movie(name, rating, genre, year, information, selectedCategory));
+                Clear();
                 this.output_message = "Congratulations, you've added " + name + " in your watchlist!";
             } else {
                 FacesContext context = FacesContext.getCurrentInstance();
@@ -45,6 +55,26 @@ public class addMovie implements Serializable {
                 this.output_message = "Check the rating!";
             }
         }
+    }
+
+    public String[] getEnumElements() {
+        public_category = new String[Movie.public_category.values().length];
+
+        int i = 0;
+        for (Movie.public_category role : Movie.public_category.values()) {
+            public_category[i++] = role.toString();
+        }
+        return public_category;
+    }
+
+    private void Clear() {
+        this.name = "";
+        this.genre = "";
+        this.rating = 0;
+        this.date = null;
+        this.information = "";
+        this.output_message = "";
+        this.selectedCategory = null;
     }
 
     public String goBack() {

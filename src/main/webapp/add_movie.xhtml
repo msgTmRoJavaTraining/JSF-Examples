@@ -19,11 +19,11 @@
 
         <h:outputText styleClass="myFont" value="Genre" style="display:block;"/>
         <p:selectOneMenu id="genre" value="#{addMovie.genre}" style="width:125px">
-            <f:selectItem itemLabel="Horror" itemValue="Horror" />
-            <f:selectItem itemLabel="Thriller" itemValue="Thriller" />
-            <f:selectItem itemLabel="Science-Fiction" itemValue="SF" />
-            <f:selectItem itemLabel="Comedy" itemValue="Comedy" />
-            <f:selectItem itemLabel="Action" itemValue="Action" />
+            <f:selectItem itemLabel="Horror" itemValue="Horror"/>
+            <f:selectItem itemLabel="Thriller" itemValue="Thriller"/>
+            <f:selectItem itemLabel="Science-Fiction" itemValue="SF"/>
+            <f:selectItem itemLabel="Comedy" itemValue="Comedy"/>
+            <f:selectItem itemLabel="Action" itemValue="Action"/>
         </p:selectOneMenu>
         <br/><br/>
 
@@ -40,20 +40,30 @@
         <p:inputText id="rating" value="#{addMovie.rating}" required="true"/>
         <br/><br/>
 
+        <h:outputText styleClass="myFont" value="Public Category" style="display:block;"/>
+        <p:selectManyCheckbox styleid="checkbox" value="#{addMovie.selectedCategory}">
+
+            <f:selectItems value="#{addMovie.public_category}" var="m" itemLabel="#{m}" itemValue="#{m}"/>
+
+        </p:selectManyCheckbox>
+        <br/><br/>
+
         <p:commandButton value="Add it!" action="#{addMovie.addingMovieAjax}"
                          styleClass="aButton"
                          ajax="true"
-                         update="outputMessage growl"
+                         update="addMovieForm"
         />
         <br/>
-        <p:commandButton value="Homepage" action="#{addMovie.goBack}"
-                         styleClass="aButton"
-                         ajax="false"
-        />
 
-    <p:outputLabel styleClass="box" id="outputMessage" style="color: red"
-                   value="#{addMovie.output_message}"/>
+
+        <p:outputLabel styleClass="box" id="outputMessage" style="color: red"
+                       value="#{addMovie.output_message}"/>
     </h:form>
+    <h:form><p:commandButton value="Homepage" action="#{addMovie.goBack}"
+                             styleClass="aButton"
+                             ajax="false"/></h:form>
+
+
     </body>
 </f:view>
 </html>
