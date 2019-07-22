@@ -8,25 +8,59 @@
 <f:view>
     <h:head>
         <title>Homepage</title>
-        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="style5.css"/>
     </h:head>
     <h:body>
         <p:growl id="growl" sticky="true" showDetail="true"  life="3000"/>
 
+
+        <h:form>
+            <p:growl>
+                <p:autoUpdate />
+            </p:growl>
+
+            <p:panelMenu style="width:300px">
+                <p:submenu label="Navigations" >
+                <p:submenu label="Links" icon="pi pi-home">
+                        <p:submenu label="Vezi Filmele" icon="pi pi-briefcase">
+                            <p:menuitem value="Tabel filme" action="#{mySessionScopeBackingBean.navigateTo('my_data_table')}" icon="pi pi-home" />
+                        </p:submenu>
+                    </p:submenu>
+                </p:submenu>
+            </p:panelMenu>
+        </h:form>
+
         <h:form>
             <div class="centered">
+
+                <h3 class="title">ID</h3>
+                <p:inputText id="inputToSave2" value="#{mySessionScopeBackingBean.id}"/>
+
+                <br/>
+                <h3 class="title">Movie</h3>
                 <p:inputText id="inputToSave" value="#{mySessionScopeBackingBean.savedData}"/>
+
+                <h3 class="title">Rating</h3>
                 <p:inputText id="inputToSave1" value="#{mySessionScopeBackingBean.rating}"/>
 
-                <p:watermark for="inputToSave" value="Movie title to save.." id="watermark"/>
-                <p:watermark for="inputToSave1" value="Movie rating.." id="watermark1"/>
 
-                <p:commandButton value="Save" action="#{mySessionScopeBackingBean.saveInput}" ajax="true"
+                <p:watermark for="inputToSave2" value="Enter movie id.." id="watermark2"/>
+                <p:watermark for="inputToSave" value="Movie title to save.." id="watermark"/>
+                <p:watermark for="inputToSave1" value="Decimal lower than 10.1" id="watermark1"/>
+
+                <br/>
+                <br/>
+                <p:commandButton value="Save" action="#{mySessionScopeBackingBean.saveInput}"
+                                 ajax="true"
                                  update="outputMessage growl"/>
                 <br/>
 
                 <p:outputLabel id="outputMessage" value="#{mySessionScopeBackingBean.outputMessage}"/>
                 <br/>
+
+                <br/>
+                <p:commandButton value="Back" ajax="false"
+                                 action="#{mySessionScopeBackingBean.navigateTo('my_homepage')}"/>
 
             </div>
         </h:form>

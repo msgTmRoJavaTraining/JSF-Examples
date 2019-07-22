@@ -19,7 +19,7 @@ public class MyLoginBackingBean implements Serializable
 
     public String validateCredentials()
     {
-        if(user.equals("movie") && password.equals("movie"))
+        if(user.equals("Bence") && password.equals("movie"))
         {
             WebHelper.getSession().setAttribute("loggedIn",true);
             return "my_homepage";

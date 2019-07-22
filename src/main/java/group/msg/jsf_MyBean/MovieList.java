@@ -2,15 +2,20 @@ package group.msg.jsf_MyBean;
 
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 @Data
-public class MovieList
-{
-    private LinkedList<Movie> listaFilme=new LinkedList<>();
+public class MovieList {
+    private String name;
+    private int id;
+    private String rating;
 
-    public void add(Movie e)
-    {
-        listaFilme.add(e);
+    private List<Movie> list = new ArrayList<>();
+
+    public void addingMovie() {
+        list.add(new Movie(id,name, rating));
     }
 }
+

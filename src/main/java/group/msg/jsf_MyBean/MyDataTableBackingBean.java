@@ -1,7 +1,5 @@
-package group.msg.jsf_beans;
+package group.msg.jsf_MyBean;
 
-import group.msg.AnimalsHolder;
-import group.msg.entities.Animal;
 import lombok.Data;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
@@ -16,38 +14,40 @@ import java.util.stream.Collectors;
 @Data
 @Named
 @ViewScoped
-public class DataTableBackingBean extends LazyDataModel<Animal> {
-    private Animal selectedAnimal;
-    private List<Animal> animalsList;
+public class MyDataTableBackingBean extends LazyDataModel<Movie>
+{
+
+    private Movie selectedMovie;
+    private List<Movie> movieList;
     private String outputMessage;
 
     @PostConstruct
     public void init() {
-        animalsList = AnimalsHolder.getAnimals();
+        movieList = MySessionScopeBackingBean.getList();
     }
 
     @Override
-    public Animal getRowData(String rowKey) {
+    public Movie getRowData(String rowKey) {
         Integer id = Integer.parseInt(rowKey);
-        return animalsList.stream().filter(a -> a.getId() == id).collect(Collectors.toList()).get(0);
+        return movieList.stream().filter(a -> a.getId() == id).collect(Collectors.toList()).get(0);
     }
 
     @Override
-    public Object getRowKey(Animal object) {
+    public Object getRowKey(Movie object) {
         return object.getId();
     }
 
     @Override
-    public List<Animal> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
-        List<Animal> filteredList = new ArrayList<>();
-        animalsList.forEach(animal -> {
+    public List<Movie> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String, Object> filters) {
+        List<Movie> filteredList = new ArrayList<>();
+        movieList.forEach(movie -> {
             boolean match = true;
             if (filters != null) {
                 for (Iterator<String> it = filters.keySet().iterator(); it.hasNext(); ) {
                     try {
                         String filterProperty = it.next();
                         Object filterValue = filters.get(filterProperty);
-                        String fieldValue = String.valueOf(animal.getClass().getField(filterProperty).get(animal));
+                        String fieldValue = String.valueOf(movie.getClass().getField(filterProperty).get(movie));
 
                         if (filterValue.equals("") || filterValue == null || fieldValue.startsWith(filterValue.toString())) {
                             match = true;
@@ -61,13 +61,12 @@ public class DataTableBackingBean extends LazyDataModel<Animal> {
                 }
             }
             if (match) {
-                filteredList.add(animal);
+                filteredList.add(movie);
             }
         });
-
         int dataSize = filteredList.size();
         if (sortField != null) {
-            filteredList.sort(new AnimalSorter(sortField, sortOrder));
+            filteredList.sort(new MovieSorter(sortField, sortOrder));
         }
         this.setRowCount(dataSize);
 
@@ -81,22 +80,21 @@ public class DataTableBackingBean extends LazyDataModel<Animal> {
         } else {
             return filteredList;
         }
-    }
-
-    public static class AnimalSorter implements Comparator<Animal> {
+}
+    public static class MovieSorter implements Comparator<Movie> {
         private String sortField;
         private SortOrder sortOrder;
 
-        public AnimalSorter(String sortField, SortOrder sortOrder) {
+        public MovieSorter(String sortField, SortOrder sortOrder) {
             this.sortField = sortField;
             this.sortOrder = sortOrder;
         }
 
         @Override
-        public int compare(Animal animal, Animal t1) {
+        public int compare(Movie movie1, Movie movie2) {
             try {
-                Object val1 = Animal.class.getField(sortField).get(animal);
-                Object val2 = Animal.class.getField(sortField).get(t1);
+                Object val1 = Movie.class.getField(sortField).get(movie1);
+                Object val2 = Movie.class.getField(sortField).get(movie2);
 
                 int comparationResult = ((Comparable) val1).compareTo(val2);
 
@@ -106,7 +104,10 @@ public class DataTableBackingBean extends LazyDataModel<Animal> {
             }
         }
     }
+
     public void rowSelected(SelectEvent event) {
-        outputMessage = selectedAnimal.nume;
+        outputMessage = "Selected movie: "+selectedMovie.getName();
     }
+
 }
+

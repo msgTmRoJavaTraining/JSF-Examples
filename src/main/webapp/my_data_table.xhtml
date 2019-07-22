@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<f:view>
+
+    <h:head>
+        <title>Homepage</title>
+        <h:outputStylesheet library="css" name="style4.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="form2">
+            <div class="centered">
+                <p:dataTable var="movie" id="moviesTable" value="#{myDataTableBackingBean}"
+                             selection="#{myDataTableBackingBean.selectedMovie}" selectionMode="single" rowKey="#{movie.id}" lazy="true" paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="5,10,15">
+                    <p:ajax event="rowSelect" listener="#{myDataTableBackingBean.rowSelected}" update=":form2:outputLabel"/>
+
+                    <p:column id="c1" headerText="Id" sortBy="#{movie.id}" filterBy="#{movie.id}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.id}"/>
+                    </p:column>
+
+                    <p:column id="c2" headerText="Name" sortBy="#{movie.name}" filterBy="#{movie.name}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.name}"/>
+                    </p:column>
+                    <p:column id="c3" headerText="Rating" sortBy="#{movie.rating}" filterBy="#{movie.rating}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.rating}"/>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <p:outputLabel id="outputLabel" value="#{myDataTableBackingBean.outputMessage}"/>
+
+                <br/>
+                <p:commandButton value="Add another movie!" ajax="false"
+                                 action="#{mySessionScopeBackingBean.navigateTo('my_scope_session')}"/>
+
+                <br/>
+                <br/>
+                <p:commandButton value="Homepage" ajax="false"
+                                 action="#{mySessionScopeBackingBean.navigateTo('my_homepage')}"/>
+
+            </div>
+        </h:form>
+    </h:body>
+
+</f:view>
+</html>

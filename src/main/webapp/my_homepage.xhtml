@@ -9,16 +9,23 @@
 <f:view>
     <h:head>
         <title>Homepage</title>
-        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="style2.css"/>
+
     </h:head>
-    <h:body>
+    <h:body >
         <h:form>
+
+            <br/>
+            <br/>
             <p:outputLabel value="Welcome, #{myHomepageBackingBean.username}"/>
             <div class="centered">
                 <h3 class="title">Movie Time!</h3>
 
-                <p:commandButton value="Sesion Scope Bean" ajax="false"
+                <p:commandButton value="Add a movie" ajax="false"
                                  action="#{myHomepageBackingBean.navigateTo('my_scope_session')}"/>
+
+                <p:commandButton value="Movie List" ajax="false"
+                                 action="#{myHomepageBackingBean.navigateTo('my_data_table')}"/>
 
                 <br/><br/>
                 <p:commandButton value="Logout" ajax="false"
@@ -26,8 +33,6 @@
 
             </div>
             <br/>
-
-
         </h:form>
     </h:body>
 </f:view>

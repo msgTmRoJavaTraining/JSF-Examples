@@ -8,19 +8,18 @@
 <f:view>
     <h:head>
         <title>MyLogin</title>
-        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="css" name="style3.css"/>
     </h:head>
-
     <h:body>
         <p:growl id="growl" sticky="false" showDetail="true" life="5000"/>
         <div class="centered">
             <h:form id="myLoginForm">
                 <h3 class="title">Movie Lover</h3>
-                <h:outputText styleClass="myFont" value="Your_Movie_Username" style="display:block;"/>
+                <h:outputText styleClass="myFont" value="Your Movie Username" style="display:block;"/>
                 <p:inputText id="username" value="#{myLoginBackingBean.user}" required="true" label="username"/>
                 <br/><br/>
 
-                <h:outputText styleClass="myFont" value="Your_Movie_Password" style="display:block;"/>
+                <h:outputText styleClass="myFont" value="Your Movie Password" style="display:block;"/>
                 <p:password id="password" value="#{myLoginBackingBean.password}" required="true" label="password"/>
                 <br/><br/>
 
@@ -28,12 +27,10 @@
                                  ajax="false"
                                  styleClass="aButton"/>
                 <br/>
-            </h:form>
 
+            </h:form>
         </div>
         <br/>
-
     </h:body>
-
 </f:view>
 </html>

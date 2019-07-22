@@ -22,4 +22,8 @@ public class Animal {
         this.age = age;
         this.ownerName = ownerName;
     }
+
+    public int getId() {
+        return id;
+    }
 }
