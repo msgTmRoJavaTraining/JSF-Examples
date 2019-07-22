@@ -1,7 +1,7 @@
 package JSFExercisesClasses.jsf_beans;
 
 import JSFExercisesClasses.Entities.Movie;
-import JSFExercisesClasses.MovieHolder;
+
 import lombok.Data;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
@@ -28,7 +28,13 @@ public class DataTableBean extends LazyDataModel<Movie> {
     public static void addMovie(Movie movie){
         movieList.add(movie);
     }
+    public String navigateTo(String page){
+        return page;
+    }
 
+    public static List<Movie> getMovieList() {
+        return movieList;
+    }
 
     @Override
     public Movie getRowData(String rowKey) {

@@ -21,6 +21,7 @@ public class SessionScopeTestBackingBean implements Serializable {
     }
 
     public void saveInput(){
+
         outputMessage = savedData;
     }
 }

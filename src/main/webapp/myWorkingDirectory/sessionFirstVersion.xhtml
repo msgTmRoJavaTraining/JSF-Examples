@@ -14,6 +14,9 @@
         <p:growl id="growl" sticky="false" showDetail="true"/>
         <h:form>
             <div class="centered">
+                <p:inputText id="Id" value="#{sessionBean.id}"/>
+                <p:watermark for="Name" value="Id of the movie.." id="watermarkId"/>
+                <br/>
                 <p:inputText id="Name" value="#{sessionBean.name}"/>
                 <p:watermark for="Name" value="Name of the movie.." id="watermarkName"/>
                 <br/>

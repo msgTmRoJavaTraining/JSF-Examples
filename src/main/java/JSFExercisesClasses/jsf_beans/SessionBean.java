@@ -1,7 +1,6 @@
 package JSFExercisesClasses.jsf_beans;
 
 import JSFExercisesClasses.Entities.Movie;
-import JSFExercisesClasses.MovieHolder;
 import lombok.Data;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -18,6 +17,7 @@ import java.util.List;
 @Named
 @Data
 public class SessionBean implements Serializable {
+    private int id;
     private String name;
     private int year;
     private int length;
@@ -26,13 +26,14 @@ public class SessionBean implements Serializable {
 
 
 
+
     private String outputMessage = "Empty";
     private String messageError = "Fatal error:Rating is not a number";
     public String calculateOutput(){
-        Movie movie = new Movie(name,year,length,author,rating);
+        Movie movie = new Movie(id,name,year,length,author,rating);
         DataTableBean.addMovie(movie);
         if(rating.contains(".")) {
-            return "Name:" + name + " Year:" + year + " Length:" + length + " Author:" + author + " Rating:" + rating;
+            return "Id:"+id+" Name:" + name + " Year:" + year + " Length:" + length + " Author:" + author + " Rating:" + rating;
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Invalid."));
             return "";
