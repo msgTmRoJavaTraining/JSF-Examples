@@ -34,3 +34,8 @@ form{
 .output-that-wraps {
     white-space: pre-wrap;
 }
+.log-out{
+    display: flex;
+    top: 0;
+    right: 0;
+}

@@ -25,6 +25,12 @@ public class LoginBackingBean implements Serializable {
             return "";
         }
     }
+    public String logOut(){
+        user="";
+        pwd="";
+        WebHelper.getSession().setAttribute("loggedIn",false);
+        return "login";
+    }
 
     public String getCurrentlyLoggedInUsername(){
         return user;
