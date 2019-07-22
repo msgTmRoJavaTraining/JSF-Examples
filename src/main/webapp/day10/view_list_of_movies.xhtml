@@ -12,24 +12,86 @@
         <h:outputStylesheet library="css" name="myStyle.css"/>
     </h:head>
     <h:body>
+        <h:form>
+            <p:growl id="messages"/>
+
+            <!-- Navbar -->
+            <p:menubar>
+                <p:menuitem value="Home" url="homepage.xhtml" icon="ui-icon-home"/>
+                <p:menuitem value="Add Movie" url="add_new_movie.xhtml" icon="ui-icon-plus"/>
+                <p:menuitem value="View Movies" url="view_list_of_movies.xhtml" icon="ui-icon-script"/>
+
+                <f:facet name="options">
+                    <p:commandButton value="Logout" ajax="false" action="#{homePageBean.logUserOut}"
+                                     icon="ui-icon-close"/>
+                </f:facet>
+            </p:menubar>
+        </h:form>
         <br/>
-        <p:dataTable var="movie" value="#{addNewMovieBean.movieList}">
-            <p:column headerText="Title">
-                <h:outputText value="#{movie.title}"/>
-            </p:column>
+        <h:form id="form1">
+            <div id="afisareListaFilmeDiv" class="centered">
+                <p:dataTable id="movieListDisplay" var="movie" value="#{viewListOfMoviesBean.listOfMovies}" rows="5"
+                             selectionMode="single" selection="#{viewListOfMoviesBean.selectedMovie}"
+                             rowKey="#{movie.title}"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             widgetVar="moviesTable"
+                             emptyMessage="No movies found with given criteria">
+                    <f:facet name="header">
+                        Movie Display
+                    </f:facet>
 
-            <p:column headerText="Genre">
-                <h:outputText value="#{movie.genre}"/>
-            </p:column>
+                    <p:ajax event="rowSelect" listener="#{viewListOfMoviesBean.onRowSelect}"
+                            update=":form1:movieTitle"/>
 
-            <p:column headerText="Rating">
-                <h:outputText value="#{movie.rating}"/>
-            </p:column>
+                    <p:column headerText="Title" filterBy="#{movie.title}" filterMatchMode="contains"
+                              sortBy="#{movie.title}">
+                        <h:outputText value="#{movie.title}"/>
+                    </p:column>
 
-            <p:column headerText="Launch Date">
-                <h:outputText value="#{movie.productionYear}"/>
-            </p:column>
-        </p:dataTable>
+                    <p:column headerText="Genre" filterBy="#{movie.genre}" filterMatchMode="in" sortBy="#{movie.genre}">
+                        <f:facet name="filter">
+                            <p:selectCheckboxMenu label="Select genres" onchange="PF('moviesTable').filter()"
+                                                  scrollHeight="150" styleClass="custom-filter">
+                                <f:selectItems value="#{addNewMovieBean.movieGenres}"/>
+                            </p:selectCheckboxMenu>
+                        </f:facet>
+                        <h:outputText value="#{movie.genre}"/>
+                    </p:column>
+
+                    <p:column headerText="Rating" filterBy="#{movie.stringRating}" filterMatchMode="in"
+                              sortBy="#{movie.stringRating}">
+                        <f:facet name="filter">
+                            <p:selectCheckboxMenu label="Select rating" onchange="PF('moviesTable').filter()"
+                                                  scrollHeight="150" styleClass="custom-filter">
+                                <f:selectItem itemLabel="1 star" itemValue="1"/>
+                                <f:selectItem itemLabel="2 stars" itemValue="2"/>
+                                <f:selectItem itemLabel="3 stars" itemValue="3"/>
+                                <f:selectItem itemLabel="4 stars" itemValue="4"/>
+                                <f:selectItem itemLabel="5 stars" itemValue="5"/>
+                            </p:selectCheckboxMenu>
+                        </f:facet>
+                        <h:outputText value="#{movie.rating}"/>
+                    </p:column>
+
+                    <p:column headerText="Launch Date" filterBy="#{movie.productionDate}" filterMatchMode="contains"
+                              sortBy="#{movie.obtainProductionAsDate()}">
+                        <h:outputText value="#{movie.productionDate}"/>
+                    </p:column>
+
+                    <p:column headerText="Suitable For" filterBy="#{movie.suitableFor}" filterMatchMode="contains">
+                        <p:outputPanel id="display">
+                            <p:dataList value="#{movie.suitableFor}" var="categories">
+                                #{categories}
+                            </p:dataList>
+                        </p:outputPanel>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+                <p:outputLabel id="movieTitle" value="#{viewListOfMoviesBean.outputMessage}"/>
+            </div>
+        </h:form>
     </h:body>
 </f:view>
 </html>
