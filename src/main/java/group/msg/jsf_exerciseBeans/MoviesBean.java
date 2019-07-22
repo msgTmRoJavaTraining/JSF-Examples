@@ -6,7 +6,6 @@ import lombok.Data;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class MoviesBean implements Serializable {
         Movie param = new Movie(givenMovie);
         moviesList.add(param);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Movie list:", listOfMovies(moviesList)));
-        return "moviePage";
+        return null;
     }
     public String listOfMovies(List<Movie>list){
         StringBuilder br = new StringBuilder();
@@ -49,5 +48,8 @@ public class MoviesBean implements Serializable {
 
     public void setMoviesList(List<Movie> moviesList) {
         this.moviesList = moviesList;
+    }
+    public String navigateTo(String page){
+        return page;
     }
 }

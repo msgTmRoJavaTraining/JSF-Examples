@@ -18,7 +18,7 @@ public class LoginDataBean implements Serializable {
     public String validateLoginData() {
         if (userName.equals("user") && password.equals("pass")) {
             WebHelper.getSession().setAttribute("loggedIn",true);
-            return "moviePage";
+            return "intermediatePage";
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Error", "Invalid credentials."));
             return "";
@@ -27,4 +27,5 @@ public class LoginDataBean implements Serializable {
     public String getCurrentlyLoggedInUsername(){
         return userName;
     }
+
 }

@@ -10,13 +10,14 @@ import org.primefaces.model.SortOrder;
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Data
 @Named
 @ViewScoped
-public class DataTableBackingBean extends LazyDataModel<Animal> {
+public class DataTableBackingBean extends LazyDataModel<Animal> implements Serializable {
     private Animal selectedAnimal;
     private List<Animal> animalsList;
     private String outputMessage;

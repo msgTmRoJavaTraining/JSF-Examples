@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>View movies</title>
+        <h:outputStylesheet library="exercise_css" name="style.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="form1">
+            <div class = "dataTable">
+                <p:dataTable id="table2" var="movie" value="#{dataTableBean}"
+                             selection="#{dataTableBean.selectedMovie}" selectionMode="single" rowKey="#{movie.name}" lazy="true" paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="5,10,15">
+
+                >
+                    <p:ajax event="rowSelect" listener="#{dataTableBean.rowSelected}" update=":form1:outputLabel"/>
+                    <p:column headerText="Name"  sortBy="#{movie.name}" filterBy="#{movie.name}"
+                              filterMatchMode="contains" style="width:25%">
+                        <h:outputText value="#{movie.name}"/>
+                    </p:column>
+                    <p:column headerText="Production year" sortBy="#{movie.productionDate}" filterBy="#{movie.productionDate}"
+                              filterMatchMode="contains" style="width:25%">
+                        <h:outputText value="#{movie.productionDate}"/></p:column>
+                    <p:column headerText="Gender" style="width:24%" sortBy="#{movie.gender}" filterBy="#{movie.gender}"
+                              filterMatchMode="contains">#{movie.gender}
+                        <h:outputText value="#{movie.gender}"/>
+
+                    </p:column>
+                    <p:column headerText="Rating" style="width:24%" sortBy="#{movie.rating}" filterBy="#{movie.rating}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.rating}"/>
+                    </p:column>
+                    <p:column headerText="Suitable" style="width:24%" sortBy="#{movie.suitableFor}"
+                              filterBy="#{movie.suitableFor}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.suitableFor}"/>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+        </div>
+            <p:outputLabel id="outputLabel" value="#{dataTableBean.outputMessage}"/>
+    </h:form>
+    </h:body>
+</f:view>
+</html>

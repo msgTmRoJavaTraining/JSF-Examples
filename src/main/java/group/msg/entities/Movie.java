@@ -1,33 +1,50 @@
 package group.msg.entities;
 
 import lombok.Data;
+import java.util.Date;
+import java.util.List;
+
 
 @Data
 public class Movie {
-    private String name;
-    private int year;
-    private double grade;
+    public String name;
+    public Date productionDate;
+    public double rating;
+    public String gender;
+    public List<String> suitableFor;
+
+
 
     public Movie(){
     }
     public Movie(Movie m){
         this.name = m.name;
-        this.grade = m.grade;
-        this.year= m.year;
+        this.rating = m.rating;
+        this.productionDate= m.productionDate;
+        this.gender= m.gender;
+        this.suitableFor= m.suitableFor;
+
     }
-    public Movie(String name, int year, double grade) {
+    public Movie(String name, Date productionDate, double rating,String gender,List<String> suitableFor) {
         this.name = name;
-        this.year = year;
-        this.grade = grade;
+        this.productionDate = productionDate;
+        this.rating = rating;
+        this.gender= gender;
+        this.suitableFor= suitableFor;
     }
 
     @Override
     public String toString() {
-        return "Movie{" +
+        StringBuilder sb = new StringBuilder();
+        sb.append("Movie{" +
                 "name='" + name + '\'' +
-                ", year=" + year +
-                ", grade=" + grade +
-                '}';
+                ", year=" + productionDate +
+                ", rating=" + rating +
+                ", gender='" + gender + '\'');
+        if(suitableFor!=null) {
+            sb.append(", suitableFor='" + suitableFor.toString() + "\'" + '}');
+        }
+        return sb.toString();
     }
 
     public String getName() {
@@ -38,19 +55,35 @@ public class Movie {
         this.name = name;
     }
 
-    public int getYear() {
-        return year;
+    public Date getProductionDate() {
+        return productionDate;
     }
 
-    public void setYear(int year) {
-        this.year = year;
+    public void setProductionDate(Date productionDate) {
+        this.productionDate = productionDate;
     }
 
-    public double getGrade() {
-        return grade;
+    public double getRating() {
+        return rating;
     }
 
-    public void setGrade(double grade) {
-        this.grade = grade;
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public List<String> getSuitableFor() {
+        return suitableFor;
+    }
+
+    public void setSuitableFor(List<String> suitableFor) {
+        this.suitableFor = suitableFor;
     }
 }

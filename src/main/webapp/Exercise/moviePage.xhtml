@@ -4,8 +4,41 @@
 <html xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
 >
+<script type="text/javascript">
+    PrimeFaces.locales['de'] = {
+        closeText: 'Schließen',
+        prevText: 'Zurück',
+        nextText: 'Weiter',
+        monthNames: ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'],
+        monthNamesShort: ['Jan', 'Feb', 'März', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
+        dayNames: ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'],
+        dayNamesShort: ['Son', 'Mon', 'Die', 'Mit', 'Don', 'Fre', 'Sam'],
+        dayNamesMin: ['S', 'M', 'D', 'M ', 'D', 'F ', 'S'],
+        weekHeader: 'Woche',
+        FirstDay: 1,
+        isRTL: false,
+        showMonthAfterYear: false,
+        yearSuffix: '',
+        timeOnlyTitle: 'Nur Zeit',
+        timeText: 'Zeit',
+        hourText: 'Stunde',
+        minuteText: 'Minute',
+        secondText: 'Sekunde',
+        currentText: 'Aktuelles Datum',
+        ampm: false,
+        month: 'Monat',
+        week: 'Woche',
+        day: 'Tag',
+        allDayText: 'Ganzer Tag'
+    };
+</script>
+
+<style type="text/css">
+    .value {
+        font-weight: bold;
+    }
+</style>
 <f:view>
     <h:head>
         <title>Insert a movie</title>
@@ -13,40 +46,50 @@
     </h:head>
     <h:body>
         <p:growl id="growl" sticky="false" showDetail="true" life="3000"/>
+        <div class="logout-button">
+            <p:button value="Logout"
+                      outcome="loginPage.html"/>
+        </div>
         <div class="centered">
             <h:form id="loginForm">
                 <h3 class="title">Insert movie info</h3>
 
                 <h:outputText styleClass="myFont" value="Name" style="display:block;"/>
-                <p:inputText id="moviename" value="#{moviesBean.givenMovie.name}" required="true" label="username" />
+                <p:inputText id="moviename" value="#{moviesBean.givenMovie.name}" required="true" label="name" />
                 <br/><br/>
 
-                <h:outputText styleClass="myFont" value="Apparition year" style="display:block;"/>
-                <p:inputText id="movieyear" value="#{moviesBean.givenMovie.year}" required="true" label="year"/>
+
+                <h:outputText styleClass="myFont" value="Production date" style="display:block;"/>
+                <p:calendar id="button" value="#{moviesBean.givenMovie.productionDate}" showOn="button" />
                 <br/><br/>
 
-                <h:outputText styleClass="myFont" value="Grade" style="display:block;"/>
-                <p:inputText id="moviegrade" value="#{moviesBean.givenMovie.grade}" required="true" label="grade"/>
+                <h:outputText styleClass="myFont" value="Gender" style="display:block;"/>
+                <p:selectOneMenu id="gender" value="#{moviesBean.givenMovie.gender}" effect="fold" editable="true">
+                    <f:selectItem itemLabel="Select One" itemValue="" />
+                    <f:selectItems value="#{selectOneMenuView.genders}" />
+                </p:selectOneMenu>
+                <br/><br/>
+
+                <h:outputText styleClass="myFont" value="Rating" style="display:block;"/>
+                <p:inputText id="moviegrade" value="#{moviesBean.givenMovie.rating}" required="true" label="rating"/>
+                <br/><br/>
+
+                <h:outputText styleClass="myFont" value="Suitable for" style="display:block;"/>
+                <p:selectManyCheckbox id="basic" value="#{moviesBean.givenMovie.suitableFor}">
+                    <f:selectItem itemLabel="Kids" itemValue="kids" />
+                    <f:selectItem itemLabel="Teeagers" itemValue="teens" />
+                    <f:selectItem itemLabel="Adults" itemValue="adults" />
+                </p:selectManyCheckbox>
                 <br/><br/>
 
                 <p:commandButton value="Save movie" action="#{moviesBean.addMovie}"
                                  ajax="true"
-                                 update="table2 growl"
+                                 update="growl"
                                  styleClass="aButton"/>
                 <br/>
             </h:form>
+
         </div>
-        <div>
-            <h:panelGroup id="table">
-                    <p:dataTable id="table2" var="movie" value="#{moviesBean.moviesList}">
-                        <p:column headerText="Name" style="width:25%">#{movie.name}</p:column>
-                        <p:column headerText="Year" style="width:25%">#{movie.year}</p:column>
-                        <p:column headerText="Grade" style="width:24%">#{movie.grade}</p:column>
-                    </p:dataTable>
-                    <br/>
-            </h:panelGroup>
-        </div>
-        <br/>
     </h:body>
 </f:view>
 </html>
