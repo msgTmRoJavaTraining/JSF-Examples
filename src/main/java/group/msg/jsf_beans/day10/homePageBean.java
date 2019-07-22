@@ -32,6 +32,7 @@ public class homePageBean implements Serializable {
 
     public String logUserOut() {
         WebHelper.getSession().setAttribute("loggedIn",false);
+        WebHelper.getSession().invalidate();
         return "my_login";
     }
 }
