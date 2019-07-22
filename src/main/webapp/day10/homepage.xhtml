@@ -13,7 +13,20 @@
     </h:head>
     <h:body>
         <h:form>
-            <p:outputLabel value="Welcome, #{homePageBean.myLoginBean.currentlyLoggedInUsername}"/>
+            <p:growl id="messages"/>
+
+            <p:menubar>
+                <p:menuitem value="Home" url="homepage.xhtml" icon="ui-icon-home"/>
+                <p:menuitem value="Add Movie" url="add_new_movie.xhtml" icon="ui-icon-plus"/>
+                <p:menuitem value="View Movies" url="view_list_of_movies.xhtml" icon="ui-icon-script"/>
+
+                <f:facet name="options">
+                    <p:commandButton value="Logout" ajax="false" action="#{homePageBean.logUserOut}" icon="ui-icon-close"/>
+                </f:facet>
+            </p:menubar>
+        </h:form>
+        <h:form>
+            <p:outputLabel value="Welcome, #{homePageBean.loggedInUserName}"/>
             <div class="centered">
                 <h3 class="title">Hi there</h3>
                 <p:commandButton value="Add new movie" ajax="false" action="#{homePageBean.navigateTo('add_new_movie')}"/>
