@@ -13,7 +13,10 @@
     <body><p:outputLabel value="Welcome #{myHomepageBackingBean.loggedInUserName}! This is your movie watchlist. "/>
     <p> </p>
 
-    <p:dataTable var="m" value="#{addMovie.list}">
+    <p:dataTable var="m" value="#{addMovie.list}" selection="#{myHomepageBackingBean.selectedMovie}"
+                 rowKey="#{m.name}"
+                 selectionMode="single">
+        <p:ajax event="rowSelect" listener="#{myHomepageBackingBean.rowSelected}" update="infoLabel"/>
         <p:column headerText="Name">
             <h:outputText value="#{m.name}"/>
         </p:column>
@@ -30,9 +33,14 @@
             <h:outputText value="#{m.rating}"/>
         </p:column>
     </p:dataTable>
-    <h:form><p:commandButton value="Add a movie in watchlist" ajax="false"
-                             action="#{myHomepageBackingBean.navigateTo('add_movie')}"/></h:form>
+    <h:form>
+        <p:commandButton value="Add a movie in watchlist" ajax="false"
+                             action="#{myHomepageBackingBean.navigateTo('add_movie')}"/>
+        <p:commandButton value="Logout" ajax="false"
+                         action="#{myHomepageBackingBean.navigateTo('index')}"/>
+    </h:form>
 
+    <p:outputLabel ajax="true" id="infoLabel" value="#{myHomepageBackingBean.outputMessage}"/>
     </body>
 
 </f:view>

@@ -11,6 +11,7 @@
         <h:outputStylesheet library="css" name="styles.css"/>
     </h:head>
     <body><h:form id="addMovieForm">
+        <p:growl id="growl" sticky="false" showDetail="true" life="3000"/>
         <h3 class="title">Add a movie</h3>
         <h:outputText styleClass="myFont" value="Name" style="display:block;"/>
         <p:inputText id="name" value="#{addMovie.name}" required="true"/>
@@ -24,6 +25,10 @@
         <p:inputText id="year" value="#{addMovie.year}" required="true"/>
         <br/><br/>
 
+        <h:outputText styleClass="myFont" value="Information" style="display:block;"/>
+        <p:inputTextarea id="info" value="#{addMovie.information}" required="false"/>
+        <br/><br/>
+
         <h:outputText styleClass="myFont" value="Rating" style="display:block;"/>
         <p:inputText id="rating" value="#{addMovie.rating}" required="true"/>
         <br/><br/>
@@ -31,7 +36,7 @@
         <p:commandButton value="Add it!" action="#{addMovie.addingMovieAjax}"
                          styleClass="aButton"
                          ajax="true"
-                         update="outputMessage"
+                         update="outputMessage growl"
         />
         <br/>
         <p:commandButton value="Homepage" action="#{addMovie.goBack}"
@@ -39,13 +44,9 @@
                          ajax="false"
         />
 
-    </h:form>
-
-    <p:outputLabel styleClass="box" id="outputMessage"
+    <p:outputLabel styleClass="box" id="outputMessage" style="color: red"
                    value="#{addMovie.output_message}"/>
-
+    </h:form>
     </body>
-
-
 </f:view>
 </html>
