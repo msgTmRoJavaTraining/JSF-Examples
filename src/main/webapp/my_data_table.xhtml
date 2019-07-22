@@ -10,16 +10,16 @@
 
     <h:head>
         <title>Homepage</title>
-        <h:outputStylesheet library="css" name="style4.css"/>
+        <h:outputStylesheet library="css" name="styles.css"/>
     </h:head>
     <h:body>
-        <h:form id="form2">
+        <h:form id="form1">
             <div class="centered">
                 <p:dataTable var="movie" id="moviesTable" value="#{myDataTableBackingBean}"
                              selection="#{myDataTableBackingBean.selectedMovie}" selectionMode="single" rowKey="#{movie.id}" lazy="true" paginator="true" rows="10"
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                             rowsPerPageTemplate="5,10,15">
-                    <p:ajax event="rowSelect" listener="#{myDataTableBackingBean.rowSelected}" update=":form2:outputLabel"/>
+                             rowsPerPageTemplate="5,7">
+                    <p:ajax event="rowSelect" listener="#{myDataTableBackingBean.rowSelected}" update=":form1:outputLabel"/>
 
                     <p:column id="c1" headerText="Id" sortBy="#{movie.id}" filterBy="#{movie.id}"
                               filterMatchMode="contains">
@@ -34,6 +34,20 @@
                               filterMatchMode="contains">
                         <h:outputText value="#{movie.rating}"/>
                     </p:column>
+
+                    <p:column id="c5" headerText="Genre" sortBy="#{movie.genre}" filterBy="#{movie.genre}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.genre}"/>
+                    </p:column>
+
+
+                    <p:column id="c4" headerText="Date" sortBy="#{movie.date}" filterBy="#{movie.date}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.date}"/>
+                    </p:column>
+
+
+
                 </p:dataTable>
                 <br/>
                 <p:outputLabel id="outputLabel" value="#{myDataTableBackingBean.outputMessage}"/>

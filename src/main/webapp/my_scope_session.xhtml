@@ -24,7 +24,7 @@
                 <p:submenu label="Links" icon="pi pi-home">
                         <p:submenu label="Vezi Filmele" icon="pi pi-briefcase">
                             <p:menuitem value="Tabel filme" action="#{mySessionScopeBackingBean.navigateTo('my_data_table')}" icon="pi pi-home" />
-                        </p:submenu>
+                         </p:submenu>
                     </p:submenu>
                 </p:submenu>
             </p:panelMenu>
@@ -36,31 +36,60 @@
                 <h3 class="title">ID</h3>
                 <p:inputText id="inputToSave2" value="#{mySessionScopeBackingBean.id}"/>
 
-                <br/>
                 <h3 class="title">Movie</h3>
                 <p:inputText id="inputToSave" value="#{mySessionScopeBackingBean.savedData}"/>
 
                 <h3 class="title">Rating</h3>
                 <p:inputText id="inputToSave1" value="#{mySessionScopeBackingBean.rating}"/>
 
+                <h3 class="title">Production</h3>
 
                 <p:watermark for="inputToSave2" value="Enter movie id.." id="watermark2"/>
                 <p:watermark for="inputToSave" value="Movie title to save.." id="watermark"/>
                 <p:watermark for="inputToSave1" value="Decimal lower than 10.1" id="watermark1"/>
 
+
+                <style type="text/css">
+                    .value {
+                        font-weight: bold;
+                    }
+                </style>
+
+                <h:form id="form">
+                <p:growl id="msgs" showDetail="true" />
+                    <p:outputLabel for="button"/>
+                    <p:calendar id="button" value="#{mySessionScopeBackingBean.date3}"  pattern="MM/dd/yyyy HH:mm:ss"/>
+                </h:form>
+
                 <br/>
+
+                <h3 class="title">Genre</h3>
+
+                <h:form>
+                <p:messages>
+                    <p:autoUpdate />
+                </p:messages>
+                </h:form>
+
+                <p:selectOneMenu id="genre" value="#{mySessionScopeBackingBean.genre}" style="width:125px">
+                    <f:selectItem itemLabel="Select genre" itemValue="" />
+                    <f:selectItem itemLabel="Action" itemValue="Action" />
+                    <f:selectItem itemLabel="Horror" itemValue="Horror" />
+                    <f:selectItem itemLabel="Comedy" itemValue="Comedy" />
+                </p:selectOneMenu>
+
+
                 <br/>
                 <p:commandButton value="Save" action="#{mySessionScopeBackingBean.saveInput}"
                                  ajax="true"
                                  update="outputMessage growl"/>
-                <br/>
 
-                <p:outputLabel id="outputMessage" value="#{mySessionScopeBackingBean.outputMessage}"/>
-                <br/>
-
-                <br/>
                 <p:commandButton value="Back" ajax="false"
                                  action="#{mySessionScopeBackingBean.navigateTo('my_homepage')}"/>
+
+                 <br/>
+                <p:outputLabel id="outputMessage" value="#{mySessionScopeBackingBean.outputMessage}"/>
+                <br/>
 
             </div>
         </h:form>

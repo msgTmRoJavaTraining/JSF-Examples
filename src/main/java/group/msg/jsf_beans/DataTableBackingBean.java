@@ -106,6 +106,7 @@ public class DataTableBackingBean extends LazyDataModel<Animal> {
             }
         }
     }
+
     public void rowSelected(SelectEvent event) {
         outputMessage = selectedAnimal.nume;
     }

@@ -11,8 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 @Named
-public class MenuBackingBeans
-{
+public class MenuBackingBeans {
 
     private MenuModel model;
 
@@ -20,10 +19,11 @@ public class MenuBackingBeans
     public void init() {
         model = new DefaultMenuModel();
 
+
         //First submenu
         DefaultSubMenu firstSubmenu = new DefaultSubMenu("Dynamic Submenu");
 
-        DefaultMenuItem item = new DefaultMenuItem("External");
+               DefaultMenuItem item = new DefaultMenuItem("External");
         item.setUrl("http://www.primefaces.org");
         item.setIcon("pi pi-home");
         firstSubmenu.addElement(item);
@@ -53,10 +53,10 @@ public class MenuBackingBeans
         model.addElement(secondSubmenu);
     }
 
-    public MenuModel getModel() {
-        return model;
-    }
-
+//    public MenuModel getModel() {
+//        return model;
+//    }
+//
 //    public void save() {
 //        addMessage("Success", "Data saved");
 //    }
@@ -68,9 +68,11 @@ public class MenuBackingBeans
 //    public void delete() {
 //        addMessage("Success", "Data deleted");
 //    }
+//
+//    public void addMessage(String summary, String detail) {
+//        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
+//        FacesContext.getCurrentInstance().addMessage(null, message);
+//    }
 
-    public void addMessage(String summary, String detail) {
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, detail);
-        FacesContext.getCurrentInstance().addMessage(null, message);
-    }
+
 }

@@ -21,6 +21,14 @@ html,body{
     font-size: 30px;
     position: center;
 }
+
+.title1{
+    color: #5dff3a;
+    font-family: Calibri;
+    font-size: 30px;
+    position: center;
+}
+
 .myFont{
     font-family: Calibri;
     color:white;
