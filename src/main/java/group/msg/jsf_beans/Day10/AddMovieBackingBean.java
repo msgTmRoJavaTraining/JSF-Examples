@@ -26,7 +26,6 @@ public class AddMovieBackingBean implements Serializable {
     public void addMovieToDatabase(){
         Movie m = new Movie(givenMovie);
         movieList.add(m);
-        //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Movie list:", listOfMovies(movieList)));
     }
 
     public String listOfMovies(List<Movie>list){

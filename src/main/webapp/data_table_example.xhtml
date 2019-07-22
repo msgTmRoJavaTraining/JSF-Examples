@@ -13,8 +13,13 @@
     <h:body>
         <h:form id="form1">
             <div class="centered">
-                <p:dataTable var="animal" id="animalsTable" value="#{dataTableBackingBean}"
-                             selection="#{dataTableBackingBean.selectedAnimal}" selectionMode="single" rowKey="#{animal.id}" lazy="true" paginator="true" rows="10"
+                <p:dataTable var="animal" id="animalsTable" value="#{dataTableBackingBean.}"
+                             selection="#{dataTableBackingBean.selectedAnimal}"
+                             selectionMode="single"
+                             rowKey="#{animal.id}"
+                             lazy="true"
+                             paginator="true"
+                             rows="10"
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                              rowsPerPageTemplate="5,10,15">
                     <p:ajax event="rowSelect" listener="#{dataTableBackingBean.rowSelected}" update=":form1:outputLabel"/>

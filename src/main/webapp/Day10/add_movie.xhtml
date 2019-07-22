@@ -20,16 +20,37 @@
                     <br/><br/>
 
                     <h:outputText styleClass="myFont" value="Movie Genre" style="display:block;"/>
-                    <p:inputText id="genre" value="#{addMovieBackingBean.givenMovie.genre}" required="true" label="genre"/>
+
+                    <p:selectOneMenu id="console" value="#{addMovieBackingBean.givenMovie.genre}" style="width:125px">
+                        <f:selectItem itemLabel="Select One" itemValue="" />
+                        <f:selectItem itemLabel="Romance" itemValue="Romance" />
+                        <f:selectItem itemLabel="Action" itemValue="Action" />
+                        <f:selectItem itemLabel="Horror" itemValue="Horror" />
+                    </p:selectOneMenu>
+
                     <br/><br/>
 
                     <h:outputText styleClass="myFont" value="Rating" style="display:block;"/>
                     <p:inputText id="rating" value="#{addMovieBackingBean.givenMovie.rating}" required="true" label="rating"/>
                     <br/><br/>
 
+                    <h:panelGrid>
+                        <p:outputLabel for="popup" value="Popup:" />
+                        <p:calendar id="popup" value="#{addMovieBackingBean.givenMovie.productionYear}" />
+                    </h:panelGrid>
+
+
+                    <p:selectManyCheckbox id="basic" value="#{addMovieBackingBean.givenMovie.suitableFor}">
+                        <f:selectItem itemLabel="Adults" itemValue="Adults" />
+                        <f:selectItem itemLabel="Teenagers" itemValue="Teenagers" />
+                        <f:selectItem itemLabel="Kids" itemValue="Kids" />
+                    </p:selectManyCheckbox>
+
 
                     <p:commandButton value="Add Movie" action="#{addMovieBackingBean.addMovieToDatabase}" ajax="false"
                                      update="outputMessage"/>
+                    <p:commandButton value="View List" ajax="false"
+                                     action="#{myHomepageBackingBean.navigateTo('my_data_table')}"/>
                     <br/>
                     <p:outputLabel id="outputMessage" value="#{addMovieBackingBean.movieList}"/>
                 </div>

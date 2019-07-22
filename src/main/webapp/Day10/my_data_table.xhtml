@@ -13,23 +13,72 @@
     <h:body>
         <h:form id="form1">
             <div class="centered">
-                <p:dataTable var="movie" value="#{addMovieBackingBean.movieList}">
+                <p:dataTable var="movie" value="#{addMovieBackingBean.movieList}"
+                             selection="#{myDataTableBackingBean.selectedMovie}"
+                             selectionMode="single"
+                             rowKey="#{movie.name}"
+                             paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="5,10,15"
+                             widgetVar="movieTable"
+                             emptyMessage="No movies found with given criteria"
+                             ajax="true">
 
-                    <p:column headerText="Name">
+                    <p:ajax event="rowSelect" listener="#{myDataTableBackingBean.rowSelected}" update=":form1:outputLabel"/>
+
+                    <f:facet name="header">
+                        <p:outputPanel>
+                            <h:outputText value="Search all fields:" />
+                            <p:inputText id="globalFilter" onkeyup="PF('movieTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+                        </p:outputPanel>
+                    </f:facet>
+
+
+                    <p:column filterBy="#{movie.name}"  sortBy="#{movie.name}" headerText="Name" filterMatchMode="contains">
                         <h:outputText value="#{movie.name}" />
                     </p:column>
 
-                    <p:column headerText="Genre">
+                    <p:column headerText="Genre" filterBy="#{movie.genre}" sortBy="#{movie.genre}" filterMatchMode="contains">
                         <h:outputText value="#{movie.genre}" />
                     </p:column>
 
-                    <p:column headerText="Rating">
+                    <p:column headerText="Rating" filterBy="#{movie.rating}" sortBy="#{movie.rating}" filterMatchMode="contains">
                         <h:outputText value="#{movie.rating}" />
                     </p:column>
 
+                    <p:column headerText="Production Year" filterBy="#{movie.productionYear}" sortBy="#{movie.productionYear}" filterMatchMode="contains">
+                        <h:outputText value="#{movie.productionYear}" />
+                    </p:column>
+
+                    <p:column headerText="Suitable for" filterBy="#{movie.suitableFor}" sortBy="#{movie.suitableFor}" filterMatchMode="contains">
+                        <h:outputText value="#{movie.suitableFor}" />
+                    </p:column>
+
+
+
+<!--                    <p:column filterBy="#{movie.genre}" headerText="Genre"  filterMatchMode="in">-->
+<!--                        <f:facet name="filter">-->
+<!--                            <p:selectCheckboxMenu label="Genre" onchange="PF('movieTable').filter()" scrollHeight="150" styleClass="custom-filter">-->
+<!--                                <f:converter converterId="javax.faces.Boolean" />-->
+<!--                                <f:selectItem itemLabel="Romance" itemValue="Romance" />-->
+<!--                                <f:selectItem itemLabel="Action" itemValue="Action" />-->
+<!--                                <f:selectItem itemLabel="Horror" itemValue="Horror" />-->
+<!--                                <f:selectItem itemLabel="Mistery" itemValue="Mistery" />-->
+<!--                            </p:selectCheckboxMenu>-->
+<!--                        </f:facet>-->
+<!--                        <h:outputText value="#{movie.genre}" />-->
+<!--                    </p:column>-->
+
+
 
                 </p:dataTable>
+<!--                <p:outputLabel value="#{myDataTableBackingBean.selectedMovie}"/>-->
                 <br/>
+
+                <p:commandButton value="Add Movie" ajax="false"
+                                 action="#{myHomepageBackingBean.navigateTo('add_movie')}"/>
+                <br/>
+                <p:outputLabel id="outputLabel" value="#{myDataTableBackingBean.outputMessage}"/>
             </div>
         </h:form>
     </h:body>
