@@ -12,6 +12,19 @@
         <h:outputStylesheet library="css" name="myStyle.css"/>
     </h:head>
     <h:body>
+        <h:form>
+            <p:growl id="messages"/>
+
+            <p:menubar>
+                <p:menuitem value="Home" url="homepage.xhtml" icon="ui-icon-home"/>
+                <p:menuitem value="Add Movie" url="add_new_movie.xhtml" icon="ui-icon-plus"/>
+                <p:menuitem value="View Movies" url="view_list_of_movies.xhtml" icon="ui-icon-script"/>
+
+                <f:facet name="options">
+                    <p:commandButton value="Logout" ajax="false" action="#{homePageBean.logUserOut}" icon="ui-icon-close"/>
+                </f:facet>
+            </p:menubar>
+        </h:form>
         <p:growl id="growl" sticky="true" showDetail="true" life="3000"/>
 
         <h:form>
@@ -19,28 +32,30 @@
                 <p:inputText id="inputTitle" value="#{addNewMovieBean.inputMovieTitle}" required="true"/>
                 <p:watermark for="inputTitle" value="Movie Title" id="watermark1"/><br/>
 
-                <p:inputText id="inputGenre" value="#{addNewMovieBean.inputMovieGenre}" required="true"/>
-                <p:watermark for="inputGenre" value="Movie Genre" id="watermark2"/><br/>
+                <p:selectOneMenu id="lazy" value="#{addNewMovieBean.inputMovieGenre}" dynamic="true" style="width:125px">
+                    <f:selectItem itemLabel="Select Genre" itemValue="" />
+                    <f:selectItems value="#{addNewMovieBean.movieGenres}" />
+                </p:selectOneMenu><br/>
 
-                <p:inputText id="inputRating" value="#{addNewMovieBean.inputMovieRating}" required="true"/>
-                <p:watermark for="inputRating" value="Movie Rating" id="watermark3"/><br/>
+                <p:selectOneMenu id="console" value="#{addNewMovieBean.inputMovieRating}" style="width:125px">
+                    <f:selectItem itemLabel="Select Rating" itemValue="" />
+                    <f:selectItem itemLabel="1 star" itemValue="1" />
+                    <f:selectItem itemLabel="2 stars" itemValue="2" />
+                    <f:selectItem itemLabel="3 stars" itemValue="3" />
+                    <f:selectItem itemLabel="4 stars" itemValue="4" />
+                    <f:selectItem itemLabel="5 stars" itemValue="5" />
+                </p:selectOneMenu><br/>
 
-                <p:inputText id="inputProductionYear" value="#{addNewMovieBean.inputMovieProductionYear}" required="true"/>
-                <p:watermark for="inputProductionYear" value="Movie Production Year" id="watermark4"/><br/><br/>
+                <p:calendar id="productionDateField" value="#{addNewMovieBean.productionDate}" showOn="button" />
+                <p:watermark for="productionDateField" value="Movie Production Year" id="watermark4"/><br/>
 
+                <p:selectManyCheckbox id="grid2" value="#{addNewMovieBean.suitableForOptionsSelected}" layout="responsive" columns="4">
+                    <f:selectItems value="#{addNewMovieBean.suitableForOptions}" var="category" itemLabel="#{category}" itemValue="#{category}" />
+                </p:selectManyCheckbox><br/>
+
+                <br/>
                 <p:commandButton value="Add new movie" action="#{addNewMovieBean.addMovieToDataBase}"
                                  update="growl"/>
-                <br/>
-
-                <!--
-                <p:outputLabel id="outputMessage" value="#{addNewMovieBean.outputMessage}"/>
-
-                <h:panelGroup id="showMovieList">
-                    <ui:repeat value="#{addNewMovieBean.movieList}" var="item">
-                        <p:outputLabel value="#{item.toString()}"/>
-                    </ui:repeat>
-                </h:panelGroup>
-                -->
 
             </div>
         </h:form>
