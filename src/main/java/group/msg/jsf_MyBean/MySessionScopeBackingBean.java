@@ -7,19 +7,24 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @SessionScoped
 @Named
 @Data
 public class MySessionScopeBackingBean implements Serializable
 {
+
     private String savedData ;
     private String rating;
     private int id;
     private String outputMessage = "";
     private Date date3;
     private String genre;
+    private String[] suitableFor;
+
 
     public void saveInput()
     {
@@ -48,7 +53,7 @@ public class MySessionScopeBackingBean implements Serializable
     }
 
     public void addingMovie() {
-        list.add(new Movie(id, savedData, rating,date3,genre));
+        list.add(new Movie(id, savedData, rating,date3,genre,suitableFor));
     }
 
     public static List<Movie> getList() {
@@ -58,4 +63,5 @@ public class MySessionScopeBackingBean implements Serializable
     public String getGenre() {
         return genre;
     }
+
 }

@@ -15,8 +15,8 @@
     <h:body>
         <h:form id="form1">
             <div class="centered">
-                <p:dataTable var="movie" id="moviesTable" value="#{myDataTableBackingBean}"
-                             selection="#{myDataTableBackingBean.selectedMovie}" selectionMode="single" rowKey="#{movie.id}" lazy="true" paginator="true" rows="10"
+                <p:dataTable var="movie" id="moviesTable" value="#{myDataTableBackingBean.movieList}"
+                             selection="#{myDataTableBackingBean.selectedMovie}" selectionMode="single" rowKey="#{movie.id}" lazy="false" paginator="true" rows="10"
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                              rowsPerPageTemplate="5,7">
                     <p:ajax event="rowSelect" listener="#{myDataTableBackingBean.rowSelected}" update=":form1:outputLabel"/>
@@ -24,12 +24,14 @@
                     <p:column id="c1" headerText="Id" sortBy="#{movie.id}" filterBy="#{movie.id}"
                               filterMatchMode="contains">
                         <h:outputText value="#{movie.id}"/>
+
                     </p:column>
 
                     <p:column id="c2" headerText="Name" sortBy="#{movie.name}" filterBy="#{movie.name}"
                               filterMatchMode="contains">
                         <h:outputText value="#{movie.name}"/>
                     </p:column>
+
                     <p:column id="c3" headerText="Rating" sortBy="#{movie.rating}" filterBy="#{movie.rating}"
                               filterMatchMode="contains">
                         <h:outputText value="#{movie.rating}"/>
@@ -46,7 +48,10 @@
                         <h:outputText value="#{movie.date}"/>
                     </p:column>
 
-
+                    <p:column id="c6" headerText="Suitable For" sortBy="#{movie.suitableFor}" filterBy="#{movie.suitableFor}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.suitableFor}"/>
+                    </p:column>
 
                 </p:dataTable>
                 <br/>
