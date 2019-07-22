@@ -31,6 +31,7 @@ public class homePageBean implements Serializable {
     }
 
     public String logUserOut() {
+        addNewMovieBean.getMovieList().clear();
         WebHelper.getSession().setAttribute("loggedIn",false);
         WebHelper.getSession().invalidate();
         return "my_login";
