@@ -18,11 +18,18 @@
         <br/><br/>
 
         <h:outputText styleClass="myFont" value="Genre" style="display:block;"/>
-        <p:inputText id="genre" value="#{addMovie.genre}" required="true"/>
+        <p:selectOneMenu id="genre" value="#{addMovie.genre}" style="width:125px">
+            <f:selectItem itemLabel="Horror" itemValue="Horror" />
+            <f:selectItem itemLabel="Thriller" itemValue="Thriller" />
+            <f:selectItem itemLabel="Science-Fiction" itemValue="SF" />
+            <f:selectItem itemLabel="Comedy" itemValue="Comedy" />
+            <f:selectItem itemLabel="Action" itemValue="Action" />
+        </p:selectOneMenu>
         <br/><br/>
 
-        <h:outputText styleClass="myFont" value="Year" style="display:block;"/>
-        <p:inputText id="year" value="#{addMovie.year}" required="true"/>
+        <h:outputText styleClass="myFont" value="Production Year" style="display:block;"/>
+        <p:calendar id="dateCalendar" value="#{addMovie.date}" showOn="button"
+                    pattern="dd-MM-yyyy" required="true" requiredMessage="Calendar field is necessary!"/>
         <br/><br/>
 
         <h:outputText styleClass="myFont" value="Information" style="display:block;"/>
