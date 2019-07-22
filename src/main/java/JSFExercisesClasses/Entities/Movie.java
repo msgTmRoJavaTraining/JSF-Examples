@@ -10,6 +10,9 @@ public class Movie {
     private int length;
     private String author;
     private String rating;
+    public Movie(){
+
+    }
     public Movie(String name, int aparitionYear, int length, String author,String rating) {
         this.name = name;
         this.aparitionYear = aparitionYear;

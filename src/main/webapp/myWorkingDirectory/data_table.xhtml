@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+<f:view>
+    <h:head>
+        <title>Homepage</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="form1">
+            <div class="centered">
+                <p:dataTable var="movie" id="moviesTable" value="#{dataTableBean}"
+                             selection="#{dataTableBean.selectedMovie}" selectionMode="single" rowKey="#{movie.rating}" lazy="true" paginator="true" rows="10"
+                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                             rowsPerPageTemplate="5,10,15">
+                    <p:ajax event="rowSelect" listener="#{dataTableBean.rowSelected}" update=":form1:outputLabel"/>
+                    <p:column id="c1" headerText="Name" sortBy="#{movie.name}" filterBy="#{movie.name}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.name}"/>
+                    </p:column>
+                    <p:column id="c2" headerText="AparitionYear" sortBy="#{movie.aparitionYear}" filterBy="#{movie.aparitionYear}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.aparitionYear}"/>
+                    </p:column>
+                    <p:column id="c3" headerText="Length" sortBy="#{movie.length}" filterBy="#{movie.length}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.length}"/>
+                    </p:column>
+                    <p:column id="c4" headerText="Author" sortBy="#{movie.author}" filterBy="#{movie.author}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.author}"/>
+                    </p:column>
+                    <p:column id="c5" headerText="Rating" sortBy="#{movie.rating}"
+                              filterBy="#{movie.rating}"
+                              filterMatchMode="contains">
+                        <h:outputText value="#{movie.rating}"/>
+                    </p:column>
+                </p:dataTable>
+                <!--<p:outputLabel value="#{dataTableBackingBean.animalsList.stream().filter(animal->animal.id==2).toList()}"/>-->
+                <br/>
+                <p:outputLabel id="outputLabel" value="#{dataTableBean.outputMessage}"/>
+            </div>
+        </h:form>
+    </h:body>
+</f:view>
+</html>

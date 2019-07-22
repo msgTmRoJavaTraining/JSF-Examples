@@ -24,6 +24,7 @@ public class HomePageBean {
     }
 
 
+
     public String navigateTo(String page){
         return page;
     }

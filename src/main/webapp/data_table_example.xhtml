@@ -18,6 +18,7 @@
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                              rowsPerPageTemplate="5,10,15">
                     <p:ajax event="rowSelect" listener="#{dataTableBackingBean.rowSelected}" update=":form1:outputLabel"/>
+                    <p:ajax event="rowSelect" listener="#{dataTableBackingBean.rowSelected}" update=":form1:outputLabel"/>
                     <p:column id="c1" headerText="Id" sortBy="#{animal.id}" filterBy="#{animal.id}"
                               filterMatchMode="contains">
                         <h:outputText value="#{animal.id}"/>

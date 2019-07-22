@@ -30,8 +30,7 @@
                 <p:watermark for="rating" value="Rating" id="watermarkRating"/>
                 <br/>
                 <p:commandButton value="Save" action="#{sessionBean.saveInput}" ajax="true"
-                                 update="outputMessage growl"/>
-
+                                 update="outputMessage growl" />
 
                 <br/>
                 <p:outputLabel id="outputMessage" value="#{sessionBean.outputMessage}"/>
