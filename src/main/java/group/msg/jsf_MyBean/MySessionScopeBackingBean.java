@@ -26,10 +26,16 @@ public class MySessionScopeBackingBean implements Serializable
     private String[] suitableFor;
 
 
+    public void add()
+    {
+
+    }
+
     public void saveInput()
     {
         if(rating.contains(".")) {
-            outputMessage += id+" " + savedData + " " + rating+ " "+genre+" "+" "+date3+" ";
+//            outputMessage += id+" " + savedData + " " + rating+ " "+genre+" "+" "+date3+" ";
+            outputMessage += savedData + " ";
             addingMovie();
         }
         else
@@ -52,8 +58,15 @@ public class MySessionScopeBackingBean implements Serializable
         this.date3 = date3;
     }
 
-    public void addingMovie() {
-        list.add(new Movie(id, savedData, rating,date3,genre,suitableFor));
+
+
+    public void addingMovie()
+    {
+        String x="";
+        for(int i=0;i<suitableFor.length;i++)
+            x=x+" "+suitableFor[i];
+
+        list.add(new Movie(id, savedData, rating,date3,genre,x));
     }
 
     public static List<Movie> getList() {
@@ -62,6 +75,10 @@ public class MySessionScopeBackingBean implements Serializable
 
     public String getGenre() {
         return genre;
+    }
+
+    public String[] getSuitableFor() {
+        return suitableFor;
     }
 
 }

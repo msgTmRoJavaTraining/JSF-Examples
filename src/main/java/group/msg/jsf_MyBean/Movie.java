@@ -13,7 +13,7 @@ public class Movie implements Serializable
     private String rating;
     private Date date;
     private String genre;
-    private String[] suitableFor;
+    private String suitableFor;
 
     public Date getDate() {
         return date;
@@ -28,7 +28,7 @@ public class Movie implements Serializable
 
     }
 
-    public Movie(int id,String name, String rating,Date date,String genre,String []s) {
+    public Movie(int id,String name, String rating,Date date,String genre,String s) {
 
         this.id=id;
         this.name = name;
@@ -49,4 +49,5 @@ public class Movie implements Serializable
     public int getId() {
         return id;
     }
+
 }

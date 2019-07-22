@@ -79,6 +79,12 @@
                 </p:selectOneMenu>
 
 
+                <p:selectManyCheckbox id="basic1" value="#{mySessionScopeBackingBean.suitableFor}">
+                    <f:selectItem itemLabel="Kids" itemValue="Kids" />
+                    <f:selectItem itemLabel="Teenagers" itemValue="Teenagers" />
+                    <f:selectItem itemLabel="Adults" itemValue="Adults" />
+                </p:selectManyCheckbox>
+
                 <br/>
                 <p:commandButton value="Save" action="#{mySessionScopeBackingBean.saveInput}"
                                  ajax="true"
@@ -93,6 +99,7 @@
 
             </div>
         </h:form>
+
     </h:body>
 
 </f:view>
