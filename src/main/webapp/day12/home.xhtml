@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Home - EJB</title>
+        <h:outputStylesheet library="css" name="ejbStyle.css"/>
+    </h:head>
+    <h:body>
+        <p:growl id="growl" sticky="false" showDetail="true" life="3000"/>
+        <div style="width: 80%; margin: auto; max-height: 50%">
+            <h:form id="form1">
+                <p:dataTable id="employeeTable" var="employee" value="#{ejbBackingBean.employeeList}"
+                             rows="5"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="5,10,15"
+                             selectionMode="single" selection="#{ejbBackingBean.selectedEmployee}"
+                             rowKey="#{employee.cnp}">
+                    <f:facet name="header">
+                        Employee Overview
+                    </f:facet>
+
+                    <p:ajax event="rowSelect" listener="#{ejbBackingBean.onRowSelect}" update="employeeTable"/>
+
+                    <p:column headerText="CNP">
+                        <h:outputText value="#{employee.cnp}"/>
+                    </p:column>
+
+                    <p:column headerText="Name">
+                        <h:outputText value="#{employee.name}"/>
+                    </p:column>
+
+                    <p:column headerText="Role">
+                        <h:outputText value="#{employee.role}"/>
+                    </p:column>
+                </p:dataTable><br/><br/>
+            </h:form>
+        </div>
+        <div>
+            <h:form>
+                <p:inputText id="inputCNP" value="#{ejbBackingBean.inputCNP}" required="true"
+                             styleClass="sameLineComponents"/>
+                <p:watermark for="inputCNP" value="Enter cnp" id="watermark1"/>
+
+                <p:inputText id="inputName" value="#{ejbBackingBean.inputName}" required="true"
+                             styleClass="sameLineComponents"/>
+                <p:watermark for="inputName" value="Enter name" id="watermark2"/>
+
+                <p:selectOneMenu id="inputRole" value="#{ejbBackingBean.inputRole}" styleClass="sameLineComponents">
+                    <f:selectItem itemLabel="Select Role" itemValue=""/>
+                    <f:selectItem itemLabel="Software engineer" itemValue="Software engineer"/>
+                    <f:selectItem itemLabel="Application Tester" itemValue="Application Tester"/>
+                    <f:selectItem itemLabel="Team Leader" itemValue="Team Leader"/>
+                    <f:selectItem itemLabel="Group Leader" itemValue="Group Leader"/>
+                    <f:selectItem itemLabel="HR Specialist" itemValue="HR Specialist"/>
+                    <f:selectItem itemLabel="Marketing Specialist" itemValue="Marketing Specialist"/>
+                </p:selectOneMenu><br/><br/>
+
+                <p:commandButton value="Add employee" action="#{ejbBackingBean.addEmployee}"
+                                 update="growl :form1:employeeTable inputCNP inputName inputRole" styleClass="sameLineComponents" icon="ui-icon-plusthick"/>
+            </h:form>
+        </div><br/>
+        <div class="row">
+
+            <h:form styleClass="sameLineComponents">
+                <p:commandButton value="Delete employee" action="#{ejbBackingBean.deleteEmployee}"
+                                 update="growl :form1:employeeTable" styleClass="sameLineComponents" icon="ui-icon-trash"/>
+            </h:form>
+
+            <h:form styleClass="sameLineComponents">
+                <p:commandButton value="Export to PDF" actionListener="#{ejbBackingBean.exportToPDF}"
+                                 styleClass="sameLineComponents" ajax="false" icon="ui-icon-arrowthickstop-1-s">
+                    <p:fileDownload value="#{ejbBackingBean.file}" />
+                </p:commandButton>
+            </h:form>
+
+            <h:form styleClass="sameLineComponents">
+                <p:commandButton value="Export to Excel" actionListener="#{ejbBackingBean.exportToExcel}"
+                                 styleClass="sameLineComponents" ajax="false" icon="ui-icon-arrowthickstop-1-s">
+                    <p:fileDownload value="#{ejbBackingBean.file}" />
+                </p:commandButton>
+            </h:form>
+        </div>
+    </h:body>
+</f:view>
+</html>
