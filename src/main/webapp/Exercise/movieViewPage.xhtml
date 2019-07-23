@@ -3,15 +3,16 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui" xmlns:h1="http://java.sun.com/jsf/html">
 <f:view>
     <h:head>
         <title>View movies</title>
-        <h:outputStylesheet library="exercise_css" name="style.css"/>
+        <h:outputStylesheet library="exercise_css" name="style3.css"/>
     </h:head>
     <h:body>
         <h:form id="form1">
             <div class = "dataTable">
+                <h1 class="title" >Current movies </h1>
                 <p:dataTable id="table2" var="movie" value="#{dataTableBean}"
                              selection="#{dataTableBean.selectedMovie}" selectionMode="single" rowKey="#{movie.name}" lazy="true" paginator="true" rows="10"
                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
@@ -23,7 +24,7 @@
                               filterMatchMode="contains" style="width:25%">
                         <h:outputText value="#{movie.name}"/>
                     </p:column>
-                    <p:column headerText="Production year" sortBy="#{movie.productionDate}" filterBy="#{movie.productionDate}"
+                    <p:column headerText="Release date" sortBy="#{movie.productionDate}" filterBy="#{movie.productionDate}"
                               filterMatchMode="contains" style="width:25%">
                         <h:outputText value="#{movie.productionDate}"/></p:column>
                     <p:column headerText="Gender" style="width:24%" sortBy="#{movie.gender}" filterBy="#{movie.gender}"

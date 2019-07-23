@@ -42,7 +42,7 @@
 <f:view>
     <h:head>
         <title>Insert a movie</title>
-        <h:outputStylesheet library="exercise_css" name="style.css"/>
+        <h:outputStylesheet library="exercise_css" name="style2.css"/>
     </h:head>
     <h:body>
         <p:growl id="growl" sticky="false" showDetail="true" life="3000"/>
@@ -85,7 +85,7 @@
                 <p:commandButton value="Save movie" action="#{moviesBean.addMovie}"
                                  ajax="true"
                                  update="growl"
-                                 styleClass="aButton"/>
+                                 style="background-color: maroon; color: white; font: italic"/>
                 <br/>
             </h:form>
 

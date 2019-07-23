@@ -8,17 +8,20 @@
 <f:view>
     <h:head>
         <title>Insert a movie</title>
+        <h:outputStylesheet library="exercise_css" name="style.css"/>
 <!--        <h:outputStylesheet library="exercise_css" name="style.css"/>-->
     </h:head>
     <h:body>
-        <h:form>
-            <p:growl id="messages" showDetail="true"/>
-            <p:menuButton value="Menu">
-                <p:menuitem value=" Logout" url="loginPage.xhtml" update="messages" icon="fa fa-user"/>
-                <p:menuitem value=" Add movies" url="moviePage.xhtml" update="messages" icon="fa fa-plus"/>
-                <p:menuitem value=" See movies" url="movieViewPage.xhtml"  ajax="false" icon="fa fa-eye"/>
-            </p:menuButton>
-        </h:form>
+        <div class="menu">
+            <h:form>
+                <p:growl id="messages" showDetail="true"/>
+                <p:menuButton value="Menu" class="button" style="appearance: revert">
+                    <p:menuitem value=" Logout" url="loginPage.xhtml" update="messages" icon="fa fa-user"/>
+                    <p:menuitem value=" Add movies" url="moviePage.xhtml" update="messages" icon="fa fa-plus"/>
+                    <p:menuitem value=" See movies" url="movieViewPage.xhtml"  ajax="false" icon="fa fa-eye"/>
+                </p:menuButton>
+            </h:form>
+        </div>
     </h:body>
 </f:view>
 </html>

@@ -1,26 +1,27 @@
-.centered {
+.dataTable{
     position: fixed;
-    top: 50%;
-    left: 50%;
-    justify-content: center;
-    display: flex;
-/* bring your own prefixes */
-    transform: translate(-50%, -50%);
+    top: 30%;
+    left: 30%;
+    transform: translate(-30%, -30%);
     margin: 0 auto;
 }
+
 
 html,body{
     width: 100%;
     height: 100%;
     margin:0;
-    background-image:url("#{resource['/exercise_css/loginback.jpg']}");
-    background-size: cover;
+    background-image:url("#{resource['/exercise_css/seeMovies.jpg']}");
+    background-size:cover;
+
 }
 .title{
+    background-color: brown;
     color: white;
     font-family: Calibri;
     font-size: 30px;
     position: center;
+    text-align: center;
 }
 .myFont{
     font-family: Calibri;
@@ -31,6 +32,6 @@ html,body{
     width: 200px;
     height: 30px;
 }
-form{
-    text-align: center;
+.menu{
+
 }

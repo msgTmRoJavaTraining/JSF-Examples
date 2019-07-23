@@ -6,11 +6,17 @@
     margin: 0 auto;
 }
 
+
 html,body{
     width: 100%;
     height: 100%;
     margin:0;
-    background-color: #74af6c;
+    background-image:url("#{resource['/exercise_css/intermediate.jpg']}");
+    background-size:cover;
+    justify-content: center;
+    display:flex;
+    align-content: center;
+    top: 50%;
 }
 .title{
     color: white;
@@ -27,6 +33,6 @@ html,body{
     width: 200px;
     height: 30px;
 }
-form{
-    text-align: center;
+.menu{
+
 }

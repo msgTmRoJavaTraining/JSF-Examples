@@ -4,7 +4,7 @@
     left: 50%;
     justify-content: center;
     display: flex;
-/* bring your own prefixes */
+    /* bring your own prefixes */
     transform: translate(-50%, -50%);
     margin: 0 auto;
 }
