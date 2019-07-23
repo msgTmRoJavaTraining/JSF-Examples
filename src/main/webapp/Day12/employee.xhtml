@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <h:body>
+        <p:growl id="growl" sticky="false" showDetail="true" life="3000"/>
+        <div class="centered">
+            <h:form id="employeeForm">
+                <div class="centered">
+                    <h:outputText styleClass="myFont" value="Employee Name" style="display:block;"/>
+                    <p:inputText id="name" value="#{pdfBackingBean.employee.name}"  label="name"/>
+                    <h:outputText styleClass="myFont" value="Role Name" style="display:block;"/>
+                    <p:inputText id="role" value="#{pdfBackingBean.employee.role}"  label="role"/>
+                    <h:outputText styleClass="myFont" value="Salary Name" style="display:block;"/>
+                    <p:inputText id="salary" value="#{pdfBackingBean.employee.salary}"  label="salary"/>
+                    <br/><br/>
+
+                    <p:commandButton value="Add Employee" action="#{pdfBackingBean.addEmployeeToDatabase}" ajax="false"
+                                     update="outputMessage"/>
+                    <br/><br/>
+
+                    <p:dataTable var="employee" value="#{pdfBackingBean.employees}">
+                        <p:column headerText="Name">
+                            <h:outputText value="#{employee.name}" />
+                        </p:column>
+
+                        <p:column headerText="Role">
+                            <h:outputText value="#{employee.role}" />
+                        </p:column>
+
+                        <p:column headerText="Salary">
+                            <h:outputText value="#{employee.salary}" />
+                        </p:column>
+
+                    </p:dataTable>
+                    <br/><br/>
+                    
+                    <p:commandButton value="Export PDF" actionListener="#{pdfBackingBean.exportToPdf}"
+                                     ajax="false" onclick="PrimeFaces.monitorDownload(start,stop);"
+                                     update="" style="background-color:lightskyblue;">
+                        <p:fileDownload value="#{pdfBackingBean.exportEmployeeStreamedContent}"/>
+                    </p:commandButton>
+                    <br/><br/>
+
+                    <p:commandButton value="Export Excel" actionListener="#{pdfBackingBean.exportToExcel}"
+                                     ajax="false" onclick="PrimeFaces.monitorDownload(start,stop);"
+                                     update="" style="background-color:lightskyblue;">
+                        <p:fileDownload value="#{pdfBackingBean.exportEmployeeStreamedContent1}"/>
+                    </p:commandButton>
+                    
+                </div>
+            </h:form>
+
+        </div>
+        <br/>
+    </h:body>
+</f:view>
+</html>
