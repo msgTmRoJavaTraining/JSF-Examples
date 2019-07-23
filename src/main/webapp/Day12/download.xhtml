@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+>
+
+<f:view>
+    <script type="text/javascript">
+        //<![CDATA[
+        function start() {
+            PF('statusDialog').show();
+        }
+
+        function stop() {
+            PF('statusDialog').hide();
+        }
+        //]]>
+    </script>
+
+        <h:form>
+         <p:commandButton value="Export PDF" actionListener="#{employeeBackingBean.exportToPdf}" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);">
+
+             <p:inputText id="inputToSave" value="#{employeeBackingBean.employee.name}"/>
+             <p:inputText id="inputToSave1" value="#{employeeBackingBean.employee.CNP}"/>
+             <p:inputText id="inputToSave2" value="#{employeeBackingBean.employee.role}"/>
+
+             <p:fileDownload value="#{employeeBackingBean.exportEmployeeStreamContent}" />
+            </p:commandButton>
+        </h:form>
+
+</f:view>
+</html>

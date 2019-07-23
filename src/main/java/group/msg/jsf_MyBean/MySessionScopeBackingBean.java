@@ -1,5 +1,6 @@
 package group.msg.jsf_MyBean;
 
+import group.msg.Day12.Employee;
 import lombok.Data;
 
 import javax.enterprise.context.SessionScoped;
