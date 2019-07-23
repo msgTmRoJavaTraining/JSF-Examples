@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <title>Employees</title>
+        <h:outputStylesheet library="css" name="styles.css"/>
+    </h:head>
+    <body>
+    <p:dataTable id="myTable" var="e" value="#{employeeExportBackingBean.list}" rows="10"
+                 paginator="true"
+                 ajax="true"
+                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                 rowsPerPageTemplate="5,10,15"
+                 rowKey="#{e.name}">
+        <p:column headerText="CNP">
+            <h:outputText value="#{e.cnp}"/>
+        </p:column>
+
+        <p:column headerText="Name">
+            <h:outputText value="#{e.name}"/>
+        </p:column>
+
+        <p:column headerText="Role">
+            <h:outputText value="#{e.role}"/>
+        </p:column>
+
+    </p:dataTable>
+    <h:form id="myForm">
+        <p:inputText id="cnp" value="#{employeeExportBackingBean.cnp}" required="true"/>
+        <p:inputText id="name" value="#{employeeExportBackingBean.name}" required="true"/>
+        <p:inputText id="role" value="#{employeeExportBackingBean.role}" required="true"/>
+        <p:commandButton value="Add to list" action="#{employeeExportBackingBean.AddEmployee}"
+                         styleClass="aButton"
+                         ajax="true"
+                         update="myTable myForm outputMessage"
+        />
+    </h:form>
+
+    <h:form>
+        <p:commandButton value="Export Excel" actionListener="#{employeeExportBackingBean.exportToExcel}"
+                         ajax="false"
+                         onclick="PrimeFaces.monitorDownload(start, stop);"
+                         styleClass="aButton">
+            <p:fileDownload value="#{employeeExportBackingBean.exportedEmployeeStreamedContent}"/>
+        </p:commandButton>
+    </h:form>
+
+    <p:outputLabel styleClass="box" id="outputMessage" style="color: red"
+                   value="#{employeeExportBackingBean.outputMessage}"/>
+    </body>
+
+</f:view>
+</html>
