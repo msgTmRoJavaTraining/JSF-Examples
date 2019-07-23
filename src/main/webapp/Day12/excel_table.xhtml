@@ -14,34 +14,37 @@
     <h:body>
         <h:form id="form1">
             <div class="centered">
-                <p:dataTable var="movie" id="moviesTable" value="#{exceltableBackingBean.employeeList}">
+                <p:dataTable var="employee" id="employeeTable" value="#{excel1BackingBean.employeeList}">
 
-                    <p:ajax event="rowSelect" listener="#{myDataTableBackingBean.rowSelected}" update=":form1:outputLabel"/>
-
-                    <p:column id="c1" headerText="Name" sortBy="#{movie.name}" filterBy="#{movie.name}"
+                    <p:column id="c1" headerText="Name" sortBy="#{employee.name}" filterBy="#{employee.name}"
                               filterMatchMode="contains">
-                        <h:outputText value="#{movie.name}"/>
+                        <h:outputText value="#{employee.name}"/>
 
                     </p:column>
 
-                    <p:column id="c2" headerText="CNP" sortBy="#{movie.CNP}" filterBy="#{movie.CNP}"
+                    <p:column id="c2" headerText="CNP" sortBy="#{employee.CNP}" filterBy="#{employee.CNP}"
                               filterMatchMode="contains">
-                        <h:outputText value="#{movie.CNP}"/>
+                        <h:outputText value="#{employee.CNP}"/>
                     </p:column>
 
-                    <p:column id="c3" headerText="Role" sortBy="#{movie.role}" filterBy="#{movie.role}"
+                    <p:column id="c3" headerText="Role" sortBy="#{employee.role}" filterBy="#{employee.role}"
                               filterMatchMode="contains">
-                        <h:outputText value="#{movie.role}"/>
+                        <h:outputText value="#{employee.role}"/>
                     </p:column>
 
                 </p:dataTable>
                 <br/>
 
-                <p:outputLabel id="outputLabel" value="#{exceltableBackingBean.outputMessage}"/>
+                <p:inputText id="inputToSave2" value="#{excel1BackingBean.name}"/>
+
+                <p:inputText id="inputToSave" value="#{excel1BackingBean.CNP}"/>
+
+                <p:inputText id="inputToSave1" value="#{excel1BackingBean.role}"/>
+
 
                 <br/>
                 <p:commandButton value="Add another movie!" ajax="false"
-                                 action="#{mySessionScopeBackingBean.navigateTo('excel_table1')}"/>
+                                 action="#{excel1BackingBean.saveInput}"/>
                 <br/>
                 <br/>
 

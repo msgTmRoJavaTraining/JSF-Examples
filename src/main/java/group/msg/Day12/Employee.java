@@ -17,5 +17,15 @@ public class Employee
         this.role = role;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public String getCNP() {
+        return CNP;
+    }
+
+    public String getRole() {
+        return role;
+    }
 }

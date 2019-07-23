@@ -3,6 +3,7 @@ package group.msg.Day12;
 import group.msg.jsf_MyBean.Movie;
 import lombok.Data;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -23,26 +24,22 @@ public class Excel1BackingBean implements Serializable {
         private String CNP;
         private String role;
 
-        public void saveInput()
-        {
-                addingMovie();
+        private List<Employee> employeeList;
+
+        @PostConstruct
+        public void init() {
+                employeeList = getList();
         }
 
-        public String navigateTo(String page){
-            return page;
+        public void saveInput()
+        {
+                list.add(new Employee(name,CNP,role));
         }
 
         private static List<Employee> list = new ArrayList<>();
 
-        public void addingMovie()
-        {
-            list.add(new Employee(name,CNP,role));
-        }
-
         public static List<Employee> getList() {
             return list;
         }
-
-
 
 }
