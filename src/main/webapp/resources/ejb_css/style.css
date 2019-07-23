@@ -1,0 +1,44 @@
+.dataTable {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    text-align: center;
+}
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+.addEmp{
+    left: 30%;
+    right:60%;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    background-color: coral;
+    top: 50%;
+}
+.title{
+    color: white;
+    font-family: Calibri;
+    font-size: 30px;
+    position: center;
+}
+.myFont{
+    font-family: Calibri;
+    color:white;
+    font-size: 20px;
+}
+.aButton{
+    width: 200px;
+    height: 30px;
+}
+.menu{
+
+}

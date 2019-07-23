@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<f:view>
+    <h:head>
+        <title>View employees</title>
+        <h:outputStylesheet library="ejb_css" name="style.css"/>
+    </h:head>
+    <h:body>
+        <h:form id="form1">
+            <div class = "dataTable">
+                <h1 class="title" >Employees list </h1>
+                <p:dataTable id="table2" var="emp" value="#{employeeExportBackingBean.emps}">
+                    <p:column headerText="CNP" style="width:25%">
+                        <h:outputText value="#{emp.CNP}"/>
+                    </p:column>
+                    <p:column headerText="Name" style="width:25%">
+                        <h:outputText value="#{emp.name}"/></p:column>
+                    <p:column headerText="Role" style="width:24%">
+                        <h:outputText value="#{emp.role}"/>
+                    </p:column>
+                </p:dataTable>
+                <br/>
+            </div>
+        </h:form>
+            <h:form >
+                <div class = "addEmp">
+                <h3 class="title">Insert employee data</h3>
+                <h:outputText styleClass="myFont" value="CNP" style="display:block;"/>
+                <p:inputText id="CNPinput" value="#{employeeExportBackingBean.emp.CNP}"/>
+                <br/> <br/>
+
+                <h:outputText styleClass="myFont" value="Name" style="display:block;"/>
+                <p:inputText id="nameInput" value="#{employeeExportBackingBean.emp.name}"/>
+                <br/> <br/>
+
+                <h:outputText styleClass="myFont" value="Role" style="display:block;"/>
+                <p:inputText id="roleInput" value="#{employeeExportBackingBean.emp.role}"/>
+                <br/> <br/>
+
+                <p:commandButton value="Add to list" action="#{employeeExportBackingBean.addEmployeeToList}"
+                                 ajax="false"
+                                 update = "inputData"
+                                 style="background-color: bisque">
+                </p:commandButton>
+                <br/> <br/>
+
+                <p:commandButton value="Export to excel" actionListener="#{employeeExportBackingBean.exportToExcel}"
+                                 ajax="false" onclick="PrimeFaces.monitorDownload(start,stop);"
+                                 update="" style="background-color: bisque">
+                    <p:fileDownload value="#{employeeExportBackingBean.exp}"/>
+                </p:commandButton>
+                </div>
+            </h:form>
+    </h:body>
+</f:view>
+</html>

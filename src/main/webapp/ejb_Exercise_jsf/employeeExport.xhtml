@@ -7,9 +7,9 @@
 <f:view>
     <h:head>
         <title>Employee list to PDF</title>
-        <h:outputStylesheet library="css" name="styles.css"/>
+        <h:outputStylesheet library="ejb_css" name="style.css"/>
     </h:head>
-    <h:body style="background-color: #74af6c; ">
+    <h:body >
         <p:growl id="growl" sticky="false" showDetail="true" life="3000"/>
             <div class = "centered" >
                 <h:form>
@@ -29,17 +29,23 @@
                         <p:commandButton value="Add to list" action="#{employeeExportBackingBean.addEmployeeToList}"
                                          ajax="false"
                                          update = "inputData"
-                                         style="background-color: coral">
+                                         style="background-color: bisque">
                         </p:commandButton>
                         <br/> <br/>
 
                         <p:commandButton value="Export PDF" actionListener="#{employeeExportBackingBean.exportToPDF}"
                                          ajax="false" onclick="PrimeFaces.monitorDownload(start,stop);"
-                                         update="" style="background-color: indianred">
+                                         update="" style="background-color: bisque">
                             <p:fileDownload value="#{employeeExportBackingBean.exp}"/>
                         </p:commandButton>
+
+                    <p:commandButton value="View employees" action="#{employeeExportBackingBean.navigateTo('showEmployees.xhtml')}"
+                                     ajax="true"
+                                     update="" style="background-color: bisque">
+                    </p:commandButton>
                 </h:form>
             </div>
+
     </h:body>
 </f:view>
 </html>
