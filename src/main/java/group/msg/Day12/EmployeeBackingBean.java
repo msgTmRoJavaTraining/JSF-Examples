@@ -36,5 +36,4 @@ public class EmployeeBackingBean
         exportEmployeeStreamContent =new DefaultStreamedContent(myEjb.exportEmployeeAsPDF(employee),
         FacesContext.getCurrentInstance().getExternalContext().getMimeType(fileName),fileName);
     }
-
 }
