@@ -1,0 +1,40 @@
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    background-color: darkgray;
+}
+
+.myFont{
+    font-family: Georgia, sans-serif, Calibri;
+    color: darkslategray;
+    font-size: 20px;
+}
+
+.aButton{
+    width: 200px;
+    height: 30px;
+}
+
+form{
+    text-align: center;
+}
+
+.sameLineComponents {
+    margin-right: 5px;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
