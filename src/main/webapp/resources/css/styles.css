@@ -39,3 +39,8 @@ form{
     top: 0;
     right: 0;
 }
+.arng .dMod .span {
+    display: flex;
+    justify-content: left;
+    margin: 3px;
+}

@@ -15,6 +15,8 @@
             <p:outputLabel value="Welcome, #{homepageBackingBean.loggedInUserName}"/>
             <div class="centered">
                 <h3 class="title">Hello!</h3>
+                <p:commandButton value="Employee" ajax="false"
+                                 action="#{homepageBackingBean.navigateTo('downloadText')}"/>
                 <p:commandButton value="Movie" ajax="false"
                                  action="#{homepageBackingBean.navigateTo('moviesPage')}"/>
                 <p:commandButton value="Ajax example" ajax="false"
