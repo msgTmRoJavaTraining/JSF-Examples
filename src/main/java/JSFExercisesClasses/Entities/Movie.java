@@ -2,8 +2,10 @@ package JSFExercisesClasses.Entities;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class Movie {
+public class Movie implements Serializable {
 
     private int id;
     private String name;
