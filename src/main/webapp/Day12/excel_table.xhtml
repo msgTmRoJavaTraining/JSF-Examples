@@ -43,7 +43,7 @@
 
 
                 <br/>
-                <p:commandButton value="Add another movie!" ajax="false"
+                <p:commandButton value="Add another employee!" ajax="false"
                                  action="#{excel1BackingBean.saveInput}"/>
                 <br/>
                 <br/>
@@ -61,9 +61,9 @@
                 </script>
 
                 <h:form>
-                    <p:commandButton value="Export Excel" actionListener="#{employeeBackingBean.exportToPdf}" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);">
+                    <p:commandButton value="Export Excel" actionListener="#{employeeBackingBean.exportToExcel}" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop);">
 
-                        <p:fileDownload value="#{employeeBackingBean.exportEmployeeStreamContent}" />
+                        <p:fileDownload value="#{employeeBackingBean.exportEmployeeStreamContent1}" />
                     </p:commandButton>
                 </h:form>
 

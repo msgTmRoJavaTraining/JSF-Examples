@@ -1,5 +1,4 @@
 package group.msg.Day12;
-
 import group.msg.jsf_MyBean.Movie;
 import lombok.Data;
 
@@ -13,11 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 @SessionScoped
 @Named
 @Data
-
 public class Excel1BackingBean implements Serializable {
 
         private String name ;
@@ -41,5 +38,4 @@ public class Excel1BackingBean implements Serializable {
         public static List<Employee> getList() {
             return list;
         }
-
 }

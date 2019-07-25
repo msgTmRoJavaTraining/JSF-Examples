@@ -1,16 +1,20 @@
 package group.msg.Day12;
 
 import com.itextpdf.text.*;
+import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.sun.xml.ws.policy.privateutil.PolicyUtils;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.ejb.Stateless;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.awt.*;
+import java.io.*;
+import java.util.List;
 
 @Stateless
-public class EmployeeEjb
+public class EmployeeEjb implements Serializable
 {
     public InputStream exportEmployeeAsPDF(Employee employee) throws IOException, DocumentException {
 
@@ -33,9 +37,5 @@ public class EmployeeEjb
         }
         return new ByteArrayInputStream(out.toByteArray());
     }
-
-
-    
-
 
 }

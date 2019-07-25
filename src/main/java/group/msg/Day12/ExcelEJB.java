@@ -1,26 +1,29 @@
 package group.msg.Day12;
 
-import com.itextpdf.text.DocumentException;
+import lombok.Data;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
+import java.io.*;
+import java.util.List;
 
-public class ExcelEJB
+@SessionScoped
+@Named
+@Data
+public class ExcelEJB implements Serializable
 {
 
-
-    public InputStream exportEmployeeAsExcel(Employee employee) throws IOException, DocumentException {
+    public InputStream exportEmployeeAsExcel(List<Employee> employeeList) throws IOException {
 
         Workbook workbook = new XSSFWorkbook();
 
-        Sheet sheet = workbook.createSheet("Persons");
+        Sheet sheet = workbook.createSheet("Employees");
         sheet.setColumnWidth(0, 6000);
         sheet.setColumnWidth(1, 4000);
+        sheet.setColumnWidth(2,5000);
 
         Row header = sheet.createRow(0);
 
@@ -42,25 +45,35 @@ public class ExcelEJB
         headerCell.setCellValue("CNP");
         headerCell.setCellStyle(headerStyle);
 
+        headerCell = header.createCell(2);
+        headerCell.setCellValue("Role");
+        headerCell.setCellStyle(headerStyle);
 
         CellStyle style = workbook.createCellStyle();
         style.setWrapText(true);
 
-        Row row = sheet.createRow(2);
-        Cell cell = row.createCell(0);
-        cell.setCellValue(employee.toString());
-        cell.setCellStyle(style);
+        int numberOfRows = 1;
+        for(Employee singleEmployee : employeeList) {
+            Row row = sheet.createRow(numberOfRows++);
 
-        cell = row.createCell(1);
-        cell.setCellValue(20);
-        cell.setCellStyle(style);
+            row.createCell(0).setCellValue(singleEmployee.getName());
+            row.createCell(2).setCellValue(singleEmployee.getRole());
+            row.createCell(1).setCellValue(singleEmployee.getCNP());
+        }
 
 
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        workbook.write(outputStream);
-        workbook.close();
-
-        return new ByteArrayInputStream(outputStream.toByteArray());
-
+        try {
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            workbook.write(outputStream);
+            outputStream.close();
+            workbook.close();
+            return new ByteArrayInputStream(outputStream.toByteArray());
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return null;
     }
+
 }
